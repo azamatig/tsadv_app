@@ -5,111 +5,227 @@ import 'package:tsadv_app/utils/widget_utils.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
-    return LoginState();
-  }
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class LoginState extends State<LoginScreen> {
-  final formKey = GlobalKey<FormState>();
+class _LoginScreenState extends State<LoginScreen> {
+  FocusNode myFocusNode;
 
+  final formKey = GlobalKey<FormState>();
   String _login;
   String _password;
-  String _grant_type;
-  bool _isAgree = false;
+
+  @override
+  void initState() {
+    super.initState();
+    myFocusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    // Clean up the focus node when the Form is disposed
+    myFocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: mainBackgroundColor,
-      body: SingleChildScrollView(
-        child: Form(
-            key: formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+      backgroundColor: Colors.white,
+      resizeToAvoidBottomPadding: false,
+      body: Column(
+        children: <Widget>[
+          Container(
+            height: MediaQuery.of(context).size.height * 0.35,
+            width: MediaQuery.of(context).size.width,
+            child: Stack(
               children: <Widget>[
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.1,
-                ),
-                Container(
-                    height: MediaQuery.of(context).size.height * 0.1,
-                    width: MediaQuery.of(context).size.width * 0.4,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage(
-                              'assets/images/logo.jpeg',
-                            ),
-                            fit: BoxFit.fill))),
-                Text("logoTitle",
-                    style:
-                        TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold)),
-                SizedBox(
-                  height: 70.0,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.85,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        labelText: "enterLogin",
-                        counterStyle: TextStyle(fontSize: 24)),
-                    onSaved: (val) => _login = val,
-                    validator: (val) => (val.isEmpty ? "loginValidate" : null),
-                  ),
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.85,
-                  child: TextFormField(
-                    decoration: InputDecoration(labelText: "enterPassword"),
-                    obscureText: true,
-                    onSaved: (val) => _password = val,
-                    validator: (val) => (val.isEmpty ? "loginValidate" : null),
-                  ),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                Center(
+                ClipPath(
                   child: Container(
+                    height: MediaQuery.of(context).size.height * 0.35,
                     width: MediaQuery.of(context).size.width,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Text(
-                          "loginAgreement",
-                          style: TextStyle(fontSize: 14.0),
+                    color: Colors.deepPurple[300],
+                  ),
+                  clipper: RoundedClipper(60),
+                ),
+                ClipPath(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 0.33,
+                    width: MediaQuery.of(context).size.width,
+                    color: Colors.deepPurpleAccent,
+                  ),
+                  clipper: RoundedClipper(50),
+                ),
+                Positioned(
+                    top: -110,
+                    left: -110,
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.30,
+                      width: MediaQuery.of(context).size.height * 0.30,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                              (MediaQuery.of(context).size.height * 0.30) / 2),
+                          color: Colors.deepPurple[300].withOpacity(0.3)),
+                      child: Center(
+                        child: Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.deepPurpleAccent),
                         ),
-                        Switch(
-                          value: _isAgree,
-                          onChanged: _agree,
-                          activeColor: Colors.deepOrangeAccent,
+                      ),
+                    )),
+                Positioned(
+                    top: -100,
+                    left: 100,
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.36,
+                      width: MediaQuery.of(context).size.height * 0.36,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                              (MediaQuery.of(context).size.height * 0.36) / 2),
+                          color: Colors.deepPurple[300].withOpacity(0.3)),
+                      child: Center(
+                        child: Container(
+                          height: 50,
+                          width: 50,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.deepPurpleAccent),
                         ),
-                      ],
-                    ),
+                      ),
+                    )),
+                Positioned(
+                    top: -50,
+                    left: 60,
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.15,
+                      width: MediaQuery.of(context).size.height * 0.15,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                              (MediaQuery.of(context).size.height * 0.15) / 2),
+                          color: Colors.deepPurple[300].withOpacity(0.3)),
+                    )),
+                Container(
+                  margin: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.15 - 50),
+                  height: MediaQuery.of(context).size.height * 0.33,
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    children: <Widget>[
+                      Image.network(
+                        "https://seeklogo.net/wp-content/uploads/2015/08/cortana-vector-logo.png",
+                        height: MediaQuery.of(context).size.height * 0.15,
+                        width: MediaQuery.of(context).size.height * 0.15,
+                        fit: BoxFit.cover,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Введите логин и пароль",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                      )
+                    ],
                   ),
                 ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.25,
-                ),
-                _loginButton(),
               ],
-            )),
+            ),
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.65,
+            width: MediaQuery.of(context).size.width,
+            child: Container(
+              margin: EdgeInsets.fromLTRB(20, 12, 20, 10),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  children: <Widget>[
+                    TextFormField(
+                      onSaved: (String val) {
+                        _login = val;
+                      },
+                      keyboardType: TextInputType.emailAddress,
+                      style: TextStyle(fontSize: 16, color: Colors.black),
+                      textInputAction: TextInputAction.next,
+                      decoration: InputDecoration(
+                        labelText: "Login",
+                        contentPadding: new EdgeInsets.symmetric(
+                            vertical:
+                                MediaQuery.of(context).size.height * 0.022,
+                            horizontal: 15.0),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
+                      ),
+                      onFieldSubmitted: (String value) {
+                        FocusScope.of(context).requestFocus(myFocusNode);
+                      },
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      onSaved: (String val) {
+                        _password = val;
+                      },
+                      focusNode: myFocusNode,
+                      obscureText: true,
+                      keyboardType: TextInputType.text,
+                      style: TextStyle(fontSize: 16, color: Colors.black),
+                      textInputAction: TextInputAction.done,
+                      decoration: InputDecoration(
+                        labelText: "Password",
+                        contentPadding: new EdgeInsets.symmetric(
+                            vertical:
+                                MediaQuery.of(context).size.height * 0.022,
+                            horizontal: 15.0),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(25)),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 7,
+                    ),
+                    SizedBox(
+                      height: 7,
+                    ),
+                    Container(
+                      child: GestureDetector(
+                          onTap: () {
+                            print("pressed");
+                            _pressLogin();
+                          },
+                          child: Container(
+                            height: MediaQuery.of(context).size.height * 0.065,
+                            decoration: BoxDecoration(
+                                color: Colors.deepPurpleAccent,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(25))),
+                            child: Center(
+                              child: Text(
+                                "ВОЙТИ",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 16),
+                              ),
+                            ),
+                          )),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          )
+        ],
       ),
-    );
-  }
-
-  void _agree(bool value) => setState(() => _isAgree = value);
-
-  Widget _loginButton() {
-    return MaterialButton(
-      color: _isAgree ? Colors.deepOrange : Colors.grey,
-      onPressed: _isAgree ? _pressLogin : () => {},
-      child: Text(
-        "signIn",
-        style: TextStyle(fontSize: 24.0, color: Colors.white),
-      ),
-      splashColor: _isAgree ? Colors.deepOrangeAccent : Colors.blueGrey,
-      height: MediaQuery.of(context).size.height * 0.135,
-      minWidth: MediaQuery.of(context).size.width,
     );
   }
 
@@ -133,36 +249,10 @@ class LoginState extends State<LoginScreen> {
         Navigator.of(context).pop();
         badLogin("error", "timeOut");
         return;
+      } else {
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/main', ModalRoute.withName('/'));
       }
-      await showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text("attention"),
-              content: Text("wantPin"),
-              shape: RoundedRectangleBorder(
-                  side: BorderSide(color: Colors.amber, width: 2.0),
-                  borderRadius: BorderRadius.circular(4.0)),
-              titleTextStyle: TextStyle(color: Colors.black),
-              contentTextStyle: TextStyle(color: Colors.black),
-              actions: <Widget>[
-                FlatButton(
-                    onPressed: () => Navigator.pushNamedAndRemoveUntil(
-                        context, '/main', ModalRoute.withName('/')),
-                    child: Text(
-                      "no",
-                      style: TextStyle(color: Colors.black),
-                    )),
-                FlatButton(
-                    onPressed: () =>
-                        Navigator.pushReplacementNamed(context, '/pin'),
-                    child: Text(
-                      "yes",
-                      style: TextStyle(color: Colors.black),
-                    ))
-              ],
-            );
-          });
     }
   }
 
@@ -173,4 +263,26 @@ class LoginState extends State<LoginScreen> {
           return errorAlertDialog(context, title, subtitle);
         });
   }
+}
+
+class RoundedClipper extends CustomClipper<Path> {
+  var differenceInHeights = 0;
+
+  RoundedClipper(int differenceInHeights) {
+    this.differenceInHeights = differenceInHeights;
+  }
+
+  @override
+  Path getClip(Size size) {
+    var path = Path();
+    path.lineTo(0, size.height - differenceInHeights);
+    path.quadraticBezierTo(
+        size.width / 2, size.height, size.width, size.height);
+    path.lineTo(size.width, 0);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }

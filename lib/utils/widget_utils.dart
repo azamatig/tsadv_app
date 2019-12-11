@@ -62,6 +62,7 @@ Widget waitingScreen(BuildContext context) {
   );
 }
 
+// ignore: non_constant_identifier_names
 Widget DropdownListItem(String title, String subTitle) {
   return Container(
     child: ListTile(
@@ -111,9 +112,10 @@ Widget corpusForExpansionTile(Widget widget) {
   );
 }
 
+// ignore: missing_return
 Future<bool> checkConnection() async {
   try {
-    final result = await InternetAddress.lookup('apps.uco.kz');
+    final result = await InternetAddress.lookup('192.168.88.94:8085/tsadv');
     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
       return true;
     }
