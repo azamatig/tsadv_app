@@ -50,7 +50,7 @@ Widget warningAlertDialog(var context, String title, String content) {
 Widget waitingScreen(BuildContext context) {
   return Scaffold(
     body: Container(
-      decoration: BoxDecoration(color: Colors.orange),
+      decoration: BoxDecoration(color: Colors.white),
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Center(
