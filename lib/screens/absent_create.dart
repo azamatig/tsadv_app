@@ -1,6 +1,7 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:dropdownfield/dropdownfield.dart';
 
 class CreatePostScreen extends StatefulWidget {
   @override
@@ -9,6 +10,23 @@ class CreatePostScreen extends StatefulWidget {
 
 class _CreatePostScreenState extends State<CreatePostScreen> {
   final format = DateFormat("yyyy-MM-dd");
+  DateTime currentDate = DateTime.now();
+  String difference = "";
+
+  final _formKey = GlobalKey<FormState>();
+  Map<String, dynamic> formData;
+  List<String> vacation = [
+    'Экологический отпуск',
+    'Социальный отпуск',
+    'Ежегодный трудовойотпуск',
+    'Отпуск по Болашак',
+    'Социальный неоплачиваемый',
+    'Воинская служба',
+    'Учебный оплачиваемый отпуск',
+    'Справка МЦГА(профлечение)',
+    'Отпуск по уходу за ребенком',
+    'Отпуск без сохранение зп',
+  ];
 
   TextEditingController _captionController = TextEditingController();
   TextEditingController _nameController = TextEditingController();
@@ -54,6 +72,12 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     }
   }
 
+  _CreatePostScreenState() {
+    formData = {
+      'vacation': '',
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -74,161 +98,178 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
         onTap: () => FocusScope.of(context).unfocus(),
         child: SingleChildScrollView(
           child: Container(
-            height: height,
-            child: Column(
-              children: <Widget>[
-                _isLoading
-                    ? Padding(
-                        padding: EdgeInsets.only(bottom: 10.0),
-                        child: LinearProgressIndicator(
-                          backgroundColor: Colors.blue[200],
-                          valueColor: AlwaysStoppedAnimation(Colors.blue),
-                        ),
-                      )
-                    : SizedBox.shrink(),
-                SizedBox(height: 20.0),
-                Text(
-                  'Пожалуйста введите даты отпуска',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-                ),
-                SizedBox(height: 20.0),
-                Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(25.0, 0.0, 0.0, 0.0),
-                      child: Container(
-                        width: 170,
-                        child: Column(
-                          children: <Widget>[
-                            Text('Дата начала'),
-                            DateTimeField(
-                              controller: _fromDateController,
+            child: Column(children: <Widget>[
+              _isLoading
+                  ? Padding(
+                      padding: EdgeInsets.only(bottom: 10.0),
+                      child: LinearProgressIndicator(
+                        backgroundColor: Colors.blue[200],
+                        valueColor: AlwaysStoppedAnimation(Colors.blue),
+                      ),
+                    )
+                  : SizedBox.shrink(),
+              SizedBox(height: 20.0),
+              Text(
+                'Пожалуйста введите даты отпуска',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+              ),
+              SizedBox(height: 20.0),
+              Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(25.0, 0.0, 0.0, 0.0),
+                    child: Container(
+                      width: 170,
+                      child: Column(
+                        children: <Widget>[
+                          Text('Дата начала'),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          DateTimeField(
+                            controller: _fromDateController,
+                            decoration: InputDecoration(
+                              labelText: "С *** числа",
+                              contentPadding: EdgeInsets.symmetric(
+                                  vertical: 20.0, horizontal: 5.0),
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: BorderSide(),
+                              ),
+                            ),
+                            format: format,
+                            onShowPicker: (context, currentValue) {
+                              return showDatePicker(
+                                  context: context,
+                                  firstDate: DateTime(1900),
+                                  initialDate: currentValue ?? DateTime.now(),
+                                  lastDate: DateTime(2100));
+                            },
+                            onChanged: (input) => _fromDate = input.toString(),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(25.0, 0.0, 0.0, 0.0),
+                    child: Container(
+                      width: 170,
+                      child: Column(
+                        children: <Widget>[
+                          Text('Дата окончания'),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          DateTimeField(
+                            controller: _toDateController,
+                            decoration: InputDecoration(
+                              labelText: "До *** числа",
+                              contentPadding: EdgeInsets.symmetric(
+                                  vertical: 20.0, horizontal: 5.0),
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                borderSide: BorderSide(),
+                              ),
+                            ),
+                            onChanged: (input) => _toDate = input.toString(),
+                            format: format,
+                            onShowPicker: (context, currentValue) {
+                              return showDatePicker(
+                                  context: context,
+                                  firstDate: DateTime(1900),
+                                  initialDate: currentValue ?? DateTime.now(),
+                                  lastDate: DateTime(2100));
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(15.0, 8.0, 15.0, 5.0),
+                  child: Form(
+                    key: _formKey,
+                    autovalidate: false,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: <Widget>[
+                          Divider(
+                              height: 5.0,
+                              color: Theme.of(context).primaryColor),
+                          DropDownField(
+                              value: formData['vacation'],
+                              icon: Icon(Icons.person_pin),
+                              required: true,
+                              hintText: 'Пожалуйста введите тип заявления',
+                              labelText: 'тип заявления',
+                              items: vacation,
+                              strict: false,
+                              setter: (dynamic newValue) {
+                                formData['vacation'] = newValue;
+                              }),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Divider(
+                              height: 5.0,
+                              color: Theme.of(context).primaryColor),
+                          Text(
+                            'Пожалуйста введите комментарий(по желанию)',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 14),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 30.0),
+                            child: TextField(
+                              controller: _captionController,
+                              style: TextStyle(fontSize: 18.0),
                               decoration: InputDecoration(
-                                contentPadding: EdgeInsets.symmetric(
-                                    vertical: 20.0, horizontal: 5.0),
-                                fillColor: Colors.white,
                                 border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  borderSide: BorderSide(),
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                labelText: 'Комментарий',
+                              ),
+                              onChanged: (input) => _caption = input,
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.all(40.0),
+                            height: 50.0,
+                            width: 250.0,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.black87,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(50.0))),
+                              child: FlatButton(
+                                onPressed: _submit,
+                                textColor: Colors.white,
+                                child: Text(
+                                  'Отправить',
+                                  style: TextStyle(fontSize: 18.0),
                                 ),
                               ),
-                              format: format,
-                              onShowPicker: (context, currentValue) {
-                                return showDatePicker(
-                                    context: context,
-                                    firstDate: DateTime(1900),
-                                    initialDate: currentValue ?? DateTime.now(),
-                                    lastDate: DateTime(2100));
-                              },
-                              onChanged: (input) =>
-                                  _fromDate = input.toString(),
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(25.0, 0.0, 0.0, 0.0),
-                      child: Container(
-                        width: 170,
-                        child: Column(
-                          children: <Widget>[
-                            Text('Дата окончания'),
-                            DateTimeField(
-                              controller: _toDateController,
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.symmetric(
-                                    vertical: 20.0, horizontal: 5.0),
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  borderSide: BorderSide(),
-                                ),
-                              ),
-                              onChanged: (input) => _toDate = input.toString(),
-                              format: format,
-                              onShowPicker: (context, currentValue) {
-                                return showDatePicker(
-                                    context: context,
-                                    firstDate: DateTime(1900),
-                                    initialDate: currentValue ?? DateTime.now(),
-                                    lastDate: DateTime(2100));
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  'Пожалуйста введите тип заявления',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30.0),
-                  child: TextField(
-                    controller: _typeController,
-                    style: TextStyle(fontSize: 18.0),
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                      labelText: 'Тип заявления',
-                    ),
-                    onChanged: (input) => _type = input,
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  'Пожалуйста введите комментарий(по желанию)',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30.0),
-                  child: TextField(
-                    controller: _captionController,
-                    style: TextStyle(fontSize: 18.0),
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                      labelText: 'Комментарий',
-                    ),
-                    onChanged: (input) => _caption = input,
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.all(40.0),
-                  height: 50.0,
-                  width: 250.0,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.black87,
-                        borderRadius: BorderRadius.all(Radius.circular(50.0))),
-                    child: FlatButton(
-                      onPressed: _submit,
-                      textColor: Colors.white,
-                      child: Text(
-                        'Отправить',
-                        style: TextStyle(fontSize: 18.0),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ]),
           ),
         ),
       ),

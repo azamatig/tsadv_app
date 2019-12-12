@@ -158,8 +158,7 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                                           onPressed: () => Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                  builder: (_) =>
-                                                      AbsenceList())),
+                                                  builder: (_) => LeaveList())),
                                           color: Colors.red,
                                           icon: Icon(Icons.date_range),
                                         ),
