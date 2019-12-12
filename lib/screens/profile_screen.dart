@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:tsadv_app/Utilities/PNetwork.dart';
+import 'package:tsadv_app/Utilities/Utilities.dart';
+import 'package:tsadv_app/models/user_info_model.dart';
 import 'package:tsadv_app/screens/absent_create.dart';
-import 'package:tsadv_app/screens/userInfo/user_screen.dart';
-import 'package:tsadv_app/utils/PNetwork.dart';
+import 'package:tsadv_app/screens/absent_list_screen.dart';
+import 'package:tsadv_app/screens/edit_profile_screen.dart';
+import 'package:tsadv_app/screens/login_page.dart';
+import 'package:tsadv_app/screens/userInfo/userDB.dart';
 
 class ProfileThreePage extends StatefulWidget {
   ProfileThreePage();
@@ -13,7 +18,37 @@ class ProfileThreePage extends StatefulWidget {
 class _ProfileThreePageState extends State<ProfileThreePage> {
   @override
   void initState() {
+    getUserPersons();
     super.initState();
+  }
+
+  UserPerson person;
+
+  Future<UserPerson> getRemoteInfo() async {
+    var res = await checkConnection();
+    var person;
+    if (res == true) {
+      person = await getRestInfo();
+      if (person != null) return person;
+    }
+    person = await UserPersonDB().getUser();
+
+    return person;
+  }
+
+  getRestInfo() async {
+    await UserInfoRest().getUserPerson();
+    var res = await UserInfoRest().getUserPerson();
+    return res;
+  }
+
+  void getUserPersons() async {
+    UserPerson person1 = await getRemoteInfo();
+    if (person1 != null) {
+      setState(() {
+        person = person1;
+      });
+    }
   }
 
   @override
@@ -54,17 +89,31 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                                     Row(
                                       children: <Widget>[
                                         Text(
-                                          'User',
-                                          style:
-                                              Theme.of(context).textTheme.title,
+                                          ' ${person.firstName}',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                         SizedBox(
                                           width: 5,
                                         ),
                                         Text(
-                                          'Name',
-                                          style:
-                                              Theme.of(context).textTheme.title,
+                                          '${person.middleName}',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 5,
+                                        ),
+                                        Text(
+                                          '${person.lastName}',
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -109,7 +158,8 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                                           onPressed: () => Navigator.push(
                                               context,
                                               MaterialPageRoute(
-                                                  builder: (_) => null)),
+                                                  builder: (_) =>
+                                                      AbsenceList())),
                                           color: Colors.red,
                                           icon: Icon(Icons.date_range),
                                         ),
@@ -125,7 +175,7 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (_) =>
-                                                      TestScreen())),
+                                                      EditProfileScreen())),
                                           color: Colors.blueAccent,
                                           icon: Icon(Icons.edit),
                                         ),
@@ -164,22 +214,22 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                           ),
                           Divider(),
                           ListTile(
-                            title: Text("Email"),
-                            subtitle: Text('azerbaev87@gmail.com'),
+                            title: Text("Дата рождения"),
+                            subtitle: Text('${person.birthDate}'),
                             leading: Icon(Icons.email),
                           ),
                           ListTile(
-                            title: Text("Телефон"),
-                            subtitle: Text('+77078332141'),
+                            title: Text("ИИН"),
+                            subtitle: Text('${person.position}'),
                             leading: Icon(Icons.phone),
                           ),
                           ListTile(
-                            title: Text("Адрес"),
-                            subtitle: Text('Кабанбай батыра 236'),
+                            title: Text("Табельный номер"),
+                            subtitle: Text('${person.locale}'),
                             leading: Icon(Icons.location_on),
                           ),
                           ListTile(
-                            title: Text('О себе'),
+                            title: Text('Семейное положение'),
                             subtitle: Text('По себе не судят'),
                             leading: Icon(Icons.person),
                           ),
@@ -188,18 +238,11 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                             subtitle: Text("Мужской"),
                             leading: Icon(Icons.person_outline),
                           ),
-                          ListTile(
-                            title: Text('Дата рождения'),
-                            subtitle: Text("22.11.1987"),
-                            leading: Icon(Icons.date_range),
-                          ),
-                          ListTile(
-                            title: Text("Дата выхода на работу "),
-                            subtitle: Text("20.01.2019"),
-                            leading: Icon(Icons.calendar_view_day),
-                          ),
                           FlatButton(
-                            onPressed: () => Navigator.maybePop(context),
+                            onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => LoginScreen())),
                             child: Text('ВЫЙТИ'),
                           ),
                         ],

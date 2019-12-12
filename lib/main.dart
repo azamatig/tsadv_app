@@ -3,7 +3,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tsadv_app/screens/login_page.dart';
 import 'package:tsadv_app/screens/profile_screen.dart';
-import 'package:tsadv_app/utils/globalvar.dart';
+import 'package:tsadv_app/Utilities/variables.dart';
 
 void main() {
   runApp(MyApp());

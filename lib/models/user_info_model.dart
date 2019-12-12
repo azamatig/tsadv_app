@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:tsadv_app/data/dbHelper.dart';
 import 'package:tsadv_app/screens/userInfo/userDB.dart';
 import 'package:tsadv_app/services/auth.dart';
-import 'package:tsadv_app/utils/globalvar.dart';
+import 'package:tsadv_app/Utilities/variables.dart';
 
 UserPerson userPersonFromJson(String str) =>
     UserPerson.fromMap(json.decode(str));
@@ -24,6 +24,8 @@ class UserPerson {
     this.language,
     this.instanceName,
     this.locale,
+    this.sex,
+    this.birthDate,
   });
 
   factory UserPerson.fromMap(Map<String, dynamic> json) => UserPerson(
@@ -39,6 +41,8 @@ class UserPerson {
         language: json["language"],
         instanceName: json["_instanceName"],
         locale: json["locale"],
+        birthDate: json["birthDate"],
+        sex: json["sex"],
       );
 
   String id;
@@ -48,14 +52,18 @@ class UserPerson {
   String middleName;
   String lastName;
   String position;
-  String email;
-  String timeZone;
+  String sex;
+  String birthDate;
   String language;
   String instanceName;
   String locale;
+  String email;
+  String timeZone;
 
   Map<String, dynamic> toMap() => {
         "id": id,
+        "sex": sex,
+        "birthDate": birthDate,
         "login": login,
         "name": name,
         "firstName": firstName,

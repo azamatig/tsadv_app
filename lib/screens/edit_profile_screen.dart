@@ -9,9 +9,11 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
+  TextEditingController _firstNameController = TextEditingController();
+  TextEditingController _lastNameController = TextEditingController();
   bool _isLoading = false;
+
+  String _firstName;
 
   @override
   void initState() {
@@ -79,7 +81,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),
                     ),
                     TextFormField(
-                      controller: firstNameController,
+                      controller: _firstNameController,
+                      onChanged: (input) => _firstName = input,
                       //       initialValue: _name,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
@@ -95,7 +98,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       //           onSaved: (input) => _name = input,
                     ),
                     TextFormField(
-                      controller: lastNameController,
+                      controller: _lastNameController,
                       //               initialValue: _lastname,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(

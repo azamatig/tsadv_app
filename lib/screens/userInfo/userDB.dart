@@ -1,7 +1,6 @@
 import 'package:tsadv_app/data/rest_ds.dart';
 import 'package:tsadv_app/models/user_info_model.dart';
 
-
 class UserPersonDB {
   DBProvider provider;
 

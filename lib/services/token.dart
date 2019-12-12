@@ -1,5 +1,5 @@
 import 'package:oauth2/oauth2.dart' as oauth2;
-import 'package:tsadv_app/utils/globalvar.dart';
+import 'package:tsadv_app/Utilities/variables.dart';
 
 class AccessToken {
   oauth2.Client _client;

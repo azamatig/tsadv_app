@@ -1,7 +1,7 @@
 import 'package:oauth2/oauth2.dart';
 import 'package:tsadv_app/data/dbHelper.dart';
 import 'package:tsadv_app/models/db_model.dart';
-import 'package:tsadv_app/services/accessToken.dart';
+import 'package:tsadv_app/services/token.dart';
 
 class Auth {
   Client _client;

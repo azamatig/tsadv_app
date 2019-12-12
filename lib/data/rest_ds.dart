@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import 'package:tsadv_app/data/sql.dart';
+import 'package:tsadv_app/data/sqlHelper.dart';
 
 class DBProvider {
   DBProvider._();
