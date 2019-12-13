@@ -97,7 +97,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     CircleAvatar(
                       radius: 60.0,
                       backgroundColor: Colors.grey,
-                      //               backgroundImage: _displayProfileImage(),
+                      backgroundImage: NetworkImage(
+                          'https://c7.hotpng.com/preview/136/22/549/user-profile-computer-icons-girl-customer-avatar.jpg'),
                     ),
                     FlatButton(
                       onPressed: () => Navigator.maybePop(context),

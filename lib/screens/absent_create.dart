@@ -78,6 +78,78 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     };
   }
 
+  // ignore: unused_element
+  Widget _userList(BuildContext context) {
+    final titles = [
+      'bike',
+      'boat',
+      'bus',
+      'car',
+      'railway',
+      'run',
+      'subway',
+      'transit',
+      'walk'
+    ];
+
+    final icons = [
+      Icons.directions_bike,
+      Icons.directions_boat,
+      Icons.directions_bus,
+      Icons.directions_car,
+      Icons.directions_railway,
+      Icons.directions_run,
+      Icons.directions_subway,
+      Icons.directions_transit,
+      Icons.directions_walk
+    ];
+
+    return ListView.builder(
+      itemCount: titles.length,
+      itemBuilder: (context, index) {
+        return Card(
+          //                           <-- Card widget
+          child: ListTile(
+            leading: Icon(icons[index]),
+            title: Text(titles[index]),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _myListView(BuildContext context) {
+    final titles = [
+      'bike',
+      'boat',
+      'bus',
+      'car',
+    ];
+
+    final icons = [
+      Icons.directions_bike,
+      Icons.directions_boat,
+      Icons.directions_bus,
+      Icons.directions_car,
+    ];
+
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      itemCount: titles.length,
+      itemBuilder: (context, index) {
+        return Card(
+          //                           <-- Card widget
+          child: ListTile(
+            leading: Icon(icons[index]),
+            title: Text('Фамилия Имя Отчество'),
+            subtitle: Text('Должность'),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
@@ -253,18 +325,32 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                             ),
                           ),
                           SizedBox(
-                            height: 15,
+                            height: 25,
                           ),
-                          FlatButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                            onPressed: () => (1),
-                            child: Text(
-                              'Добавить утверждающего',
-                              style: TextStyle(color: Colors.white),
-                              textAlign: TextAlign.center,
+                          Container(
+                            child: Column(
+                              children: <Widget>[
+                                Text('Список утверждающих'),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                _myListView(context),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                FlatButton(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15)),
+                                  onPressed: () => (1),
+                                  child: Text(
+                                    'Добавить утверждающего',
+                                    style: TextStyle(color: Colors.white),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  color: Colors.black,
+                                ),
+                              ],
                             ),
-                            color: Colors.lightGreen,
                           ),
                         ],
                       ),

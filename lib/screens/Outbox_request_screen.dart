@@ -3,7 +3,7 @@ import 'package:tsadv_app/models/user_info_model.dart';
 import 'package:tsadv_app/models/user_model.dart';
 import 'package:tsadv_app/screens/edit_profile_screen.dart';
 
-class LeaveList extends StatefulWidget {
+class OutboxList extends StatefulWidget {
   final User user;
   final String currentUserId;
   final String userId;
@@ -18,7 +18,7 @@ class LeaveList extends StatefulWidget {
   final String fromDate;
   final String toDate;
 
-  LeaveList(
+  OutboxList(
       {this.userId,
       this.postImage,
       this.postDesc,
@@ -32,10 +32,10 @@ class LeaveList extends StatefulWidget {
       this.toDate});
 
   @override
-  _LeaveListState createState() => _LeaveListState();
+  _OutboxListState createState() => _OutboxListState();
 }
 
-class _LeaveListState extends State<LeaveList> {
+class _OutboxListState extends State<OutboxList> {
   // ignore: unused_field
   String _users;
 
@@ -89,20 +89,7 @@ class _LeaveListState extends State<LeaveList> {
           ),
         ),
         backgroundColor: Colors.white,
-        body: Container(
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 10,
-              ),
-              Text('Исходящие запросы'),
-              SizedBox(
-                height: 10,
-              ),
-              Expanded(child: _myListView(context)),
-            ],
-          ),
-        ));
+        body: _myListView(context));
   }
 }
 
@@ -132,7 +119,6 @@ Widget _myListView(BuildContext context) {
   ];
 
   return ListView.builder(
-    shrinkWrap: true,
     itemCount: titles.length,
     itemBuilder: (context, index) {
       return Card(

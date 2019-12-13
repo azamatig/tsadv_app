@@ -55,6 +55,10 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+            onPressed: () => print(1),
+            backgroundColor: Colors.redAccent,
+            child: Icon(Icons.menu)),
         backgroundColor: Colors.grey.shade300,
         body: SingleChildScrollView(
           child: Stack(
