@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tsadv_app/models/user_info_model.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  EditProfileScreen();
+  final UserPerson person;
+
+  EditProfileScreen(this.person);
 
   @override
   _EditProfileScreenState createState() => _EditProfileScreenState();
@@ -11,15 +14,40 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController _firstNameController = TextEditingController();
   TextEditingController _lastNameController = TextEditingController();
-  bool _isLoading = false;
+  TextEditingController _middleNameController = TextEditingController();
+  TextEditingController _sexController = TextEditingController();
+  TextEditingController _birthDateController = TextEditingController();
+  TextEditingController _localeController = TextEditingController();
+  TextEditingController _positionController = TextEditingController();
+  TextEditingController _timeController = TextEditingController();
+  TextEditingController _nameController = TextEditingController();
 
-  String _firstName;
+  bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
   }
 
+  _submit() async {
+    widget.person.firstName = _firstNameController.text;
+    widget.person.lastName = _lastNameController.text;
+    widget.person.middleName = _middleNameController.text;
+    widget.person.position = _positionController.text;
+    widget.person.sex = _sexController.text;
+    widget.person.locale = _localeController.text;
+    widget.person.birthDate = _birthDateController.text;
+    widget.person.timeZone = _timeController.text;
+    widget.person.name = _nameController.text;
+
+    if (_formKey.currentState.validate() && !_isLoading) {
+      _formKey.currentState.save();
+
+      setState(() {
+        _isLoading = true;
+      });
+    }
+  }
   /* _displayProfileImage() {
     // No new profile image
     if (_profileImage == null) {
@@ -82,8 +110,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                     TextFormField(
                       controller: _firstNameController,
-                      onChanged: (input) => _firstName = input,
-                      //       initialValue: _name,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
                         icon: Icon(
@@ -92,14 +118,20 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         labelText: 'Имя',
                       ),
-                      validator: (input) => input.trim().length < 1
-                          ? 'Please enter a valid name'
-                          : null,
-                      //           onSaved: (input) => _name = input,
+                    ),
+                    TextFormField(
+                      controller: _middleNameController,
+                      style: TextStyle(fontSize: 18.0),
+                      decoration: InputDecoration(
+                        icon: Icon(
+                          Icons.trip_origin,
+                          size: 30.0,
+                        ),
+                        labelText: 'Отчество',
+                      ),
                     ),
                     TextFormField(
                       controller: _lastNameController,
-                      //               initialValue: _lastname,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
                         icon: Icon(
@@ -108,28 +140,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         labelText: 'Фамилия',
                       ),
-                      validator: (input) => input.trim().length < 1
-                          ? 'Please enter a valid name'
-                          : null,
-                      //                  onSaved: (input) => _lastname = input,
-                    ),
-                    TextFormField(
-                      //                  initialValue: _birth,
-                      style: TextStyle(fontSize: 18.0),
-                      decoration: InputDecoration(
-                        icon: Icon(
-                          Icons.trip_origin,
-                          size: 30.0,
-                        ),
-                        labelText: 'Дата рождения',
-                      ),
                       validator: (input) => input.trim().length > 150
                           ? 'Please enter a bio less than 150 characters'
                           : null,
-                      //                  onSaved: (input) => _birth = input,
                     ),
                     TextFormField(
-                      //                   initialValue: _gender,
+                      controller: _sexController,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
                         icon: Icon(
@@ -141,98 +157,76 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       validator: (input) => input.trim().length > 150
                           ? 'Please enter a bio less than 150 characters'
                           : null,
-                      //               onSaved: (input) => _gender = input,
                     ),
                     TextFormField(
-                      //                initialValue: _bio,
+                      controller: _positionController,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
                         icon: Icon(
                           Icons.trip_origin,
                           size: 30.0,
                         ),
-                        labelText: 'О себе',
+                        labelText: ' Должность',
                       ),
                       validator: (input) => input.trim().length > 150
                           ? 'Please enter a bio less than 150 characters'
                           : null,
-                      //                  onSaved: (input) => _bio = input,
                     ),
                     TextFormField(
-                      //                initialValue: _empdate,
+                      controller: _localeController,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
                         icon: Icon(
                           Icons.trip_origin,
                           size: 30.0,
                         ),
-                        labelText: 'Дете выхода на работу',
+                        labelText: 'Местоположение',
                       ),
                       validator: (input) => input.trim().length > 150
                           ? 'Please enter a bio less than 150 characters'
                           : null,
-                      //              onSaved: (input) => _empdate = input,
                     ),
                     TextFormField(
-                      //             initialValue: _phone,
-
+                      controller: _birthDateController,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
                         icon: Icon(
                           Icons.trip_origin,
                           size: 30.0,
                         ),
-                        labelText: 'Телефон',
+                        labelText: 'Дата рождения',
                       ),
                       validator: (input) => input.trim().length > 150
                           ? 'Please enter a bio less than 150 characters'
                           : null,
-                      //              onSaved: (input) => _phone = input,
                     ),
                     TextFormField(
-                      //               initialValue: _location,
+                      controller: _timeController,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
                         icon: Icon(
                           Icons.trip_origin,
                           size: 30.0,
                         ),
-                        labelText: 'Город',
+                        labelText: 'ИИН',
                       ),
                       validator: (input) => input.trim().length > 150
                           ? 'Please enter a bio less than 150 characters'
                           : null,
-                      //                     onSaved: (input) => _location = input,
                     ),
                     TextFormField(
-                      //                   initialValue: _adress,
+                      controller: _nameController,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
                         icon: Icon(
                           Icons.trip_origin,
                           size: 30.0,
                         ),
-                        labelText: 'Адрес',
+                        labelText: 'Табельный номер',
                       ),
                       validator: (input) => input.trim().length > 150
                           ? 'Please enter a bio less than 150 characters'
                           : null,
-                      //                    onSaved: (input) => _adress = input,
-                    ),
-                    TextFormField(
-                      //              initialValue: _occupation,
-                      style: TextStyle(fontSize: 18.0),
-                      decoration: InputDecoration(
-                        icon: Icon(
-                          Icons.trip_origin,
-                          size: 30.0,
-                        ),
-                        labelText: 'Должность',
-                      ),
-                      validator: (input) => input.trim().length > 150
-                          ? 'Please enter a bio less than 150 characters'
-                          : null,
-                      //           onSaved: (input) => _occupation = input,
                     ),
                     Container(
                       margin: EdgeInsets.all(40.0),
@@ -244,7 +238,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(50.0))),
                         child: FlatButton(
-                          onPressed: null,
+                          onPressed: () {
+                            _submit(); //fun1
+                            Navigator.pop(context); //fun2
+                          },
                           textColor: Colors.white,
                           child: Text(
                             'Сохранить',

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tsadv_app/models/user_info_model.dart';
 import 'package:tsadv_app/models/user_model.dart';
+import 'package:tsadv_app/screens/edit_profile_screen.dart';
 
 class LeaveList extends StatefulWidget {
   final User user;
@@ -34,6 +36,7 @@ class LeaveList extends StatefulWidget {
 }
 
 class _LeaveListState extends State<LeaveList> {
+  // ignore: unused_field
   String _users;
 
   @override
@@ -55,10 +58,12 @@ class _LeaveListState extends State<LeaveList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         elevation: 0,
         title: TextField(
           controller: _searchController,
           decoration: InputDecoration(
+            fillColor: Colors.white,
             contentPadding: EdgeInsets.symmetric(vertical: 15.0),
             border: InputBorder.none,
             hintText: 'Поиск',
@@ -77,7 +82,7 @@ class _LeaveListState extends State<LeaveList> {
           onSubmitted: (input) {
             if (input.isNotEmpty) {
               setState(() {
-                //        _users = DatabaseService.searchUsers(input);
+                //      _users = DBProvider.searchUsers(input);
               });
             }
           },
@@ -95,6 +100,7 @@ class _LeaveListState extends State<LeaveList> {
 }
 
 Container buildItem() {
+  UserPerson person;
   return Container(
     child: Card(
       elevation: 10,
@@ -226,7 +232,7 @@ Container buildItem() {
                     child: FlatButton(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15)),
-                      //     onPressed: () => null(),
+                      onPressed: () => EditProfileScreen(person),
                       child: Text(
                         'Отклонить',
                         style: TextStyle(color: Colors.white),
@@ -244,7 +250,7 @@ Container buildItem() {
                     child: FlatButton(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15)),
-                      //     onPressed: () => null(),
+                      onPressed: () => (1),
                       child: Text(
                         'Одобрить',
                         style: TextStyle(color: Colors.white),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tsadv_app/Utilities/PNetwork.dart';
 import 'package:tsadv_app/Utilities/Utilities.dart';
+import 'package:tsadv_app/data/user_rest.dart';
 import 'package:tsadv_app/models/user_info_model.dart';
 import 'package:tsadv_app/screens/absent_create.dart';
 import 'package:tsadv_app/screens/absent_list_screen.dart';
@@ -82,7 +83,7 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Container(
-                                margin: EdgeInsets.only(left: 96.0),
+                                margin: EdgeInsets.only(left: 94.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
@@ -91,7 +92,7 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                                         Text(
                                           ' ${person.firstName}',
                                           style: TextStyle(
-                                            fontSize: 18,
+                                            fontSize: 15,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
@@ -101,7 +102,7 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                                         Text(
                                           '${person.middleName}',
                                           style: TextStyle(
-                                            fontSize: 18,
+                                            fontSize: 15,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
@@ -111,7 +112,7 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                                         Text(
                                           '${person.lastName}',
                                           style: TextStyle(
-                                            fontSize: 18,
+                                            fontSize: 15,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
@@ -119,8 +120,8 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                                     ),
                                     ListTile(
                                       contentPadding: EdgeInsets.all(0),
-                                      title: Text('Developer'),
-                                      subtitle: Text('Almaty, KZ'),
+                                      title: Text('${person.position}'),
+                                      subtitle: Text('${person.locale}'),
                                     ),
                                   ],
                                 ),
@@ -174,7 +175,8 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (_) =>
-                                                      EditProfileScreen())),
+                                                      EditProfileScreen(
+                                                          person))),
                                           color: Colors.blueAccent,
                                           icon: Icon(Icons.edit),
                                         ),
@@ -219,12 +221,12 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                           ),
                           ListTile(
                             title: Text("ИИН"),
-                            subtitle: Text('${person.position}'),
+                            subtitle: Text('${person.timeZone}'),
                             leading: Icon(Icons.phone),
                           ),
                           ListTile(
                             title: Text("Табельный номер"),
-                            subtitle: Text('${person.locale}'),
+                            subtitle: Text('${person.name}'),
                             leading: Icon(Icons.location_on),
                           ),
                           ListTile(
@@ -234,7 +236,7 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                           ),
                           ListTile(
                             title: Text('Пол'),
-                            subtitle: Text("Мужской"),
+                            subtitle: Text("${person.sex}"),
                             leading: Icon(Icons.person_outline),
                           ),
                           FlatButton(

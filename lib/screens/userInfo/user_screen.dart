@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tsadv_app/Utilities/Utilities.dart';
+import 'package:tsadv_app/data/user_rest.dart';
 import 'package:tsadv_app/models/user_info_model.dart';
 import 'package:tsadv_app/screens/userInfo/userDB.dart';
 import 'package:tsadv_app/Utilities/variables.dart';
@@ -18,6 +19,15 @@ class TestScreenState extends State<TestScreen> {
   void initState() {
     getUserPersons();
     super.initState();
+  }
+
+  getLocalInfo() async {
+    var assignment;
+    assignment = await UserPersonDB().getUser();
+    if (assignment == null) {
+      assignment = getRemoteInfo();
+    }
+    return assignment;
   }
 
   Future<UserPerson> getRemoteInfo() async {

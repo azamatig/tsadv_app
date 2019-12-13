@@ -80,16 +80,24 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          onPressed: _submit,
+          backgroundColor: Colors.green,
+          child: Icon(Icons.navigate_next)),
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
         title: Center(
-          child: Text(
-            'Новый запрос',
-            style: TextStyle(
-              color: Colors.black,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(0.0, 0.0, 40.0, 0.0),
+            child: Text(
+              'Новый запрос',
+              style: TextStyle(
+                color: Colors.black,
+              ),
             ),
           ),
         ),
@@ -129,9 +137,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           DateTimeField(
                             controller: _fromDateController,
                             decoration: InputDecoration(
-                              labelText: "С *** числа",
+                              labelText: "Начало",
                               contentPadding: EdgeInsets.symmetric(
-                                  vertical: 20.0, horizontal: 5.0),
+                                  vertical: 15.0, horizontal: 10.0),
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
@@ -165,9 +173,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           DateTimeField(
                             controller: _toDateController,
                             decoration: InputDecoration(
-                              labelText: "До *** числа",
+                              labelText: "Конец",
                               contentPadding: EdgeInsets.symmetric(
-                                  vertical: 20.0, horizontal: 5.0),
+                                  vertical: 15.0, horizontal: 10.0),
                               fillColor: Colors.white,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
@@ -244,24 +252,19 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               onChanged: (input) => _caption = input,
                             ),
                           ),
-                          Container(
-                            margin: EdgeInsets.all(40.0),
-                            height: 50.0,
-                            width: 250.0,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.black87,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(50.0))),
-                              child: FlatButton(
-                                onPressed: _submit,
-                                textColor: Colors.white,
-                                child: Text(
-                                  'Отправить',
-                                  style: TextStyle(fontSize: 18.0),
-                                ),
-                              ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          FlatButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15)),
+                            onPressed: () => (1),
+                            child: Text(
+                              'Добавить утверждающего',
+                              style: TextStyle(color: Colors.white),
+                              textAlign: TextAlign.center,
                             ),
+                            color: Colors.lightGreen,
                           ),
                         ],
                       ),
