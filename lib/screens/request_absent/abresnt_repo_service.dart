@@ -31,20 +31,6 @@ class RepositoryServiceReq {
   }
 
   static Future<void> addReqs(Reqs reqs) async {
-    /*final sql = '''INSERT INTO ${DatabaseCreator.todoTable}
-    (
-      ${DatabaseCreator.id},
-      ${DatabaseCreator.name},
-      ${DatabaseCreator.info},
-      ${DatabaseCreator.isDeleted}
-    )
-    VALUES
-    (
-      ${todo.id},
-      "${todo.name}",
-      "${todo.info}",
-      ${todo.isDeleted ? 1 : 0}
-    )''';*/
 
     final sql = '''INSERT INTO ${DBRequest.reqTable}
     (
@@ -73,10 +59,6 @@ class RepositoryServiceReq {
   }
 
   static Future<void> deleteReqs(Reqs reqs) async {
-    /*final sql = '''UPDATE ${DatabaseCreator.todoTable}
-    SET ${DatabaseCreator.isDeleted} = 1
-    WHERE ${DatabaseCreator.id} = ${todo.id}
-    ''';*/
 
     final sql = '''UPDATE ${DBRequest.reqTable}
     SET ${DBRequest.isDeleted} = 1
@@ -90,10 +72,6 @@ class RepositoryServiceReq {
   }
 
   static Future<void> updateReqs(Reqs reqs) async {
-    /*final sql = '''UPDATE ${DatabaseCreator.todoTable}
-    SET ${DatabaseCreator.name} = "${todo.name}"
-    WHERE ${DatabaseCreator.id} = ${todo.id}
-    ''';*/
 
     final sql = '''UPDATE ${DBRequest.reqTable}
     SET ${DBRequest.name} = ?
