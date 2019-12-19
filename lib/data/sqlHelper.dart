@@ -1,7 +1,10 @@
-String tasks = """
+String admins = """
   CREATE TABLE TASKS (
    id TEXT PRIMARY KEY,
    userId TEXT,
+   firstName TEXT,
+   lastName TEXT,
+   position TEXT,
    task TEXT
 )
   """;
@@ -65,11 +68,14 @@ String userInfo = """
     id TEXT PRIMARY KEY,
     login TEXT,
     name TEXT,
-    firstName TEXT DEFAULT 'Test',
-    middleName TEXT DEFAULT 'middleName',
-    lastName TEXT DEFAULT 'lastName',
+    firstName TEXT DEFAULT '',
+    middleName TEXT DEFAULT '',
+    lastName TEXT DEFAULT '',
     position TEXT,
     email TEXT,
+    sex TEXT,
+    locale TEXT,
+    birthDate TEXT,
     timeZone TEXT,
     language TEXT,
     _instanceName TEXT,
@@ -85,10 +91,14 @@ String notification = """
   )
 """;
 
-String events = """
+String requestList = """
   CREATE TABLE EVENTS (
     id TEXT PRIMARY KEY,
     userId TEXT,
+    fromDate TEXT,
+    toDate TEXT,
+    comments TEXT,
+    type TEXT,
     event TEXT
   )
 """;

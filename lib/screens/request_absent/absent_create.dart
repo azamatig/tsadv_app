@@ -1,7 +1,12 @@
+import 'dart:math';
+
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:dropdownfield/dropdownfield.dart';
+import 'package:tsadv_app/screens/Admins/adminList.dart';
+import 'package:tsadv_app/screens/request_absent/abresnt_repo_service.dart';
+import 'package:tsadv_app/screens/request_absent/req_model.dart';
 
 class CreatePostScreen extends StatefulWidget {
   @override
@@ -12,13 +17,20 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   final format = DateFormat("yyyy-MM-dd");
   DateTime currentDate = DateTime.now();
   String difference = "";
+  Future<List<Reqs>> future;
+  String fromDate;
+  String toDate;
+  String comment;
+  String type;
+  String name;
+  int id;
 
   final _formKey = GlobalKey<FormState>();
   Map<String, dynamic> formData;
   List<String> vacation = [
     'Экологический отпуск',
     'Социальный отпуск',
-    'Ежегодный трудовойотпуск',
+    'Ежегодный трудовой отпуск',
     'Отпуск по Болашак',
     'Социальный неоплачиваемый',
     'Воинская служба',
@@ -33,7 +45,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   TextEditingController _fromDateController = TextEditingController();
   TextEditingController _toDateController = TextEditingController();
   TextEditingController _typeController = TextEditingController();
-  String _caption = '';
+  String _comment = '';
   // ignore: unused_field
   String _name = '';
   // ignore: unused_field
@@ -47,8 +59,48 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
   bool _isLoading = false;
 
+  void createReqs() async {
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+      int count = await RepositoryServiceReq.reqsCount();
+      final reqs = Reqs(
+          count, name, randomReqs(), false, fromDate, toDate, comment, type);
+      await RepositoryServiceReq.addReqs(reqs);
+      setState(() {
+        fromDate = reqs.fromDate;
+        toDate = reqs.toDate;
+        comment = reqs.comment;
+        type = reqs.type;
+        id = reqs.id;
+        future = RepositoryServiceReq.getAllReqs();
+      });
+      print(reqs.id);
+    }
+  }
+
+  String randomReqs() {
+    final randomNumber = Random().nextInt(4);
+    String reqs;
+    switch (randomNumber) {
+      case 1:
+        reqs = 'test 💩';
+        break;
+      case 2:
+        reqs = 'test 🤣';
+        break;
+      case 3:
+        reqs = 'test 🤗';
+        break;
+      default:
+        reqs = 'test 🤓';
+        break;
+    }
+    return reqs;
+  }
+
+  // ignore: unused_element
   _submit() async {
-    if (!_isLoading && _caption.isNotEmpty) {
+    if (!_isLoading && _comment.isNotEmpty) {
       setState(() {
         _isLoading = true;
       });
@@ -61,7 +113,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
       _typeController.clear();
 
       setState(() {
-        _caption = '';
+        _comment = '';
         _name = '';
         _type = '';
         _fromDate = '';
@@ -78,85 +130,16 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     };
   }
 
-  // ignore: unused_element
-  Widget _userList(BuildContext context) {
-    final titles = [
-      'bike',
-      'boat',
-      'bus',
-      'car',
-      'railway',
-      'run',
-      'subway',
-      'transit',
-      'walk'
-    ];
-
-    final icons = [
-      Icons.directions_bike,
-      Icons.directions_boat,
-      Icons.directions_bus,
-      Icons.directions_car,
-      Icons.directions_railway,
-      Icons.directions_run,
-      Icons.directions_subway,
-      Icons.directions_transit,
-      Icons.directions_walk
-    ];
-
-    return ListView.builder(
-      itemCount: titles.length,
-      itemBuilder: (context, index) {
-        return Card(
-          //                           <-- Card widget
-          child: ListTile(
-            leading: Icon(icons[index]),
-            title: Text(titles[index]),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _myListView(BuildContext context) {
-    final titles = [
-      'bike',
-      'boat',
-      'bus',
-      'car',
-    ];
-
-    final icons = [
-      Icons.directions_bike,
-      Icons.directions_boat,
-      Icons.directions_bus,
-      Icons.directions_car,
-    ];
-
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      itemCount: titles.length,
-      itemBuilder: (context, index) {
-        return Card(
-          //                           <-- Card widget
-          child: ListTile(
-            leading: Icon(icons[index]),
-            title: Text('Фамилия Имя Отчество'),
-            subtitle: Text('Должность'),
-          ),
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-          onPressed: _submit,
+          onPressed: () {
+            createReqs();
+            Navigator.pop(context);
+          },
           backgroundColor: Colors.green,
           child: Icon(Icons.navigate_next)),
       appBar: AppBar(
@@ -226,7 +209,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                   initialDate: currentValue ?? DateTime.now(),
                                   lastDate: DateTime(2100));
                             },
-                            onChanged: (input) => _fromDate = input.toString(),
+                            onChanged: (input) => fromDate = input.toString(),
                           ),
                         ],
                       ),
@@ -254,7 +237,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                 borderSide: BorderSide(),
                               ),
                             ),
-                            onChanged: (input) => _toDate = input.toString(),
+                            onChanged: (input) => toDate = input.toString(),
                             format: format,
                             onShowPicker: (context, currentValue) {
                               return showDatePicker(
@@ -271,7 +254,11 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                 ],
               ),
               SizedBox(
-                height: 20,
+                height: 15,
+              ),
+              Text(
+                'Пожалуйста установите тип заявления',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
               ),
               Container(
                 child: Padding(
@@ -287,10 +274,11 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               color: Theme.of(context).primaryColor),
                           DropDownField(
                               value: formData['vacation'],
-                              icon: Icon(Icons.person_pin),
+                              controller: _typeController,
+                              onValueChanged: (input) => type = input,
                               required: true,
                               hintText: 'Пожалуйста введите тип заявления',
-                              labelText: 'тип заявления',
+                              labelText: 'Тип заявления',
                               items: vacation,
                               strict: false,
                               setter: (dynamic newValue) {
@@ -321,7 +309,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                 ),
                                 labelText: 'Комментарий',
                               ),
-                              onChanged: (input) => _caption = input,
+                              onChanged: (input) => comment = input,
                             ),
                           ),
                           SizedBox(
@@ -334,20 +322,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                 SizedBox(
                                   height: 15,
                                 ),
-                                _myListView(context),
+                                Container(height: 300, child: SqfLiteCrud()),
                                 SizedBox(
                                   height: 15,
-                                ),
-                                FlatButton(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(15)),
-                                  onPressed: () => (1),
-                                  child: Text(
-                                    'Добавить утверждающего',
-                                    style: TextStyle(color: Colors.white),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  color: Colors.black,
                                 ),
                               ],
                             ),

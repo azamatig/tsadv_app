@@ -117,7 +117,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Icons.trip_origin,
                           size: 30.0,
                         ),
-                        labelText: 'Имя',
+                        labelText: '${widget.person.firstName}',
                       ),
                     ),
                     TextFormField(
@@ -128,7 +128,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Icons.trip_origin,
                           size: 30.0,
                         ),
-                        labelText: 'Отчество',
+                        labelText: '${widget.person.middleName}',
                       ),
                     ),
                     TextFormField(
@@ -139,7 +139,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Icons.trip_origin,
                           size: 30.0,
                         ),
-                        labelText: 'Фамилия',
+                        labelText: '${widget.person.lastName}',
                       ),
                       validator: (input) => input.trim().length > 150
                           ? 'Please enter a bio less than 150 characters'
@@ -153,7 +153,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Icons.trip_origin,
                           size: 30.0,
                         ),
-                        labelText: 'Пол',
+                        labelText: '${widget.person.sex}',
                       ),
                       validator: (input) => input.trim().length > 150
                           ? 'Please enter a bio less than 150 characters'
@@ -167,7 +167,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Icons.trip_origin,
                           size: 30.0,
                         ),
-                        labelText: ' Должность',
+                        labelText: '${widget.person.position}',
                       ),
                       validator: (input) => input.trim().length > 150
                           ? 'Please enter a bio less than 150 characters'
@@ -181,7 +181,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Icons.trip_origin,
                           size: 30.0,
                         ),
-                        labelText: 'Местоположение',
+                        labelText: '${widget.person.locale}',
                       ),
                       validator: (input) => input.trim().length > 150
                           ? 'Please enter a bio less than 150 characters'
@@ -195,7 +195,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Icons.trip_origin,
                           size: 30.0,
                         ),
-                        labelText: 'Дата рождения',
+                        labelText: '${widget.person.birthDate}',
                       ),
                       validator: (input) => input.trim().length > 150
                           ? 'Please enter a bio less than 150 characters'
@@ -209,7 +209,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Icons.trip_origin,
                           size: 30.0,
                         ),
-                        labelText: 'ИИН',
+                        labelText: '${widget.person.timeZone}',
                       ),
                       validator: (input) => input.trim().length > 150
                           ? 'Please enter a bio less than 150 characters'
@@ -223,7 +223,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Icons.trip_origin,
                           size: 30.0,
                         ),
-                        labelText: 'Табельный номер',
+                        labelText: '${widget.person.name}',
                       ),
                       validator: (input) => input.trim().length > 150
                           ? 'Please enter a bio less than 150 characters'

@@ -36,6 +36,7 @@ dependencies:
   datetime_picker_formfield: ^0.4.3
   intl: ^0.15.7
   dropdownfield: ^1.0.3
+  flutter_local_notifications: ^0.8.4+3
 
 dev_dependencies:
   pedantic: ^1.8.0+1

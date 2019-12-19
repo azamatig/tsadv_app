@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tsadv_app/screens/Admins/DBCreator.dart';
 import 'package:tsadv_app/screens/login_page.dart';
 import 'package:tsadv_app/screens/profile_screen.dart';
 import 'package:tsadv_app/Utilities/variables.dart';
+import 'package:tsadv_app/screens/request_absent/absentDB.dart';
 
-void main() {
+void main() async {
+  await DatabaseCreator().initDatabase();
+  await DBRequest().initDatabase();
   runApp(MyApp());
 }
 
 Future<bool> sharePreferences() async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
+  langValue = preferences.getString("langValue");
+  if (langValue == null) {
+    await preferences.setString("langValue", "ru");
+  }
   var res = (preferences.getBool("firstSingIn") ?? false);
   return res;
 }

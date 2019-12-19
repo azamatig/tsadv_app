@@ -3,10 +3,11 @@ import 'package:tsadv_app/Utilities/PNetwork.dart';
 import 'package:tsadv_app/Utilities/Utilities.dart';
 import 'package:tsadv_app/data/user_rest.dart';
 import 'package:tsadv_app/models/user_info_model.dart';
-import 'package:tsadv_app/screens/absent_create.dart';
-import 'package:tsadv_app/screens/absent_list_screen.dart';
+import 'package:tsadv_app/screens/request_absent/absent_create.dart';
+import 'package:tsadv_app/screens/request_absent/absent_list_screen.dart';
 import 'package:tsadv_app/screens/edit_profile_screen.dart';
 import 'package:tsadv_app/screens/login_page.dart';
+import 'package:tsadv_app/screens/request_absent/inbox_request_absent.dart';
 import 'package:tsadv_app/screens/userInfo/userDB.dart';
 
 class ProfileThreePage extends StatefulWidget {
@@ -56,7 +57,8 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
-            onPressed: () => print(1),
+            onPressed: () => Navigator.push(
+                context, MaterialPageRoute(builder: (_) => LeaveInboxList())),
             backgroundColor: Colors.redAccent,
             child: Icon(Icons.menu)),
         backgroundColor: Colors.grey.shade300,
@@ -235,7 +237,7 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                           ),
                           ListTile(
                             title: Text('Семейное положение'),
-                            subtitle: Text('По себе не судят'),
+                            subtitle: Text('Холост'),
                             leading: Icon(Icons.person),
                           ),
                           ListTile(
