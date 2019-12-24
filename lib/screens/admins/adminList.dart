@@ -204,16 +204,16 @@ class _SqfLiteCrudState extends State<SqfLiteCrud> {
     String todo;
     switch (randomNumber) {
       case 1:
-        todo = 'Like and subscribe 💩';
+        todo = 'test 2 💩';
         break;
       case 2:
-        todo = 'Twitter @robertbrunhage 🤣';
+        todo = 'test 3 🤣';
         break;
       case 3:
-        todo = 'Patreon in the description 🤗';
+        todo = 'test 4 🤗';
         break;
       default:
-        todo = 'Leave a comment 🤓';
+        todo = 'test 5 🤓';
         break;
     }
     return todo;

@@ -1,5 +1,5 @@
 import 'package:tsadv_app/data/rest_ds.dart';
-import 'package:tsadv_app/models/user_info_model.dart';
+import 'package:tsadv_app/models/test_user_model.dart';
 
 class UserPersonDB {
   DBProvider provider;
@@ -8,23 +8,22 @@ class UserPersonDB {
     provider = DBProvider.db;
   }
 
-  Future<UserPerson> getUser() async {
+  Future<UserTest> getUser() async {
     final db = await provider.database;
     var res = await db.query("USERINFO");
-    UserPerson item = res.isNotEmpty
-        ? res.map((c) => UserPerson.fromMap(c)).toList()[0]
-        : null;
+    UserTest item =
+        res.isNotEmpty ? res.map((c) => UserTest.fromMap(c)).toList()[0] : null;
     return item;
   }
 
-  updateInfo(UserPerson person) async {
+  updateInfo(UserTest person) async {
     final db = await provider.database;
     var res = await db.update("USERINFO", person.toMap(),
         where: "id = ?", whereArgs: [person.id]);
     return res;
   }
 
-  insertNewInfo(UserPerson person) async {
+  insertNewInfo(UserTest person) async {
     final db = await provider.database;
     var table;
     await db

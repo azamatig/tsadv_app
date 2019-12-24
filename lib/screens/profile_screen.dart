@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:tsadv_app/Utilities/PNetwork.dart';
-import 'package:tsadv_app/Utilities/Utilities.dart';
+import 'package:tsadv_app/Utilities/utilities.dart';
 import 'package:tsadv_app/data/user_rest.dart';
-import 'package:tsadv_app/models/user_info_model.dart';
+import 'package:tsadv_app/models/test_user_model.dart';
+import 'package:tsadv_app/screens/menu_UI.dart';
 import 'package:tsadv_app/screens/request_absent/absent_create.dart';
-import 'package:tsadv_app/screens/request_absent/absent_list_screen.dart';
+import 'package:tsadv_app/screens/request_absent/outbox_request_absent.dart';
 import 'package:tsadv_app/screens/edit_profile_screen.dart';
 import 'package:tsadv_app/screens/login_page.dart';
-import 'package:tsadv_app/screens/request_absent/inbox_request_absent.dart';
 import 'package:tsadv_app/screens/userInfo/userDB.dart';
+import 'package:tsadv_app/utilities/variables.dart';
 
 class ProfileThreePage extends StatefulWidget {
   ProfileThreePage();
@@ -20,13 +21,12 @@ class ProfileThreePage extends StatefulWidget {
 class _ProfileThreePageState extends State<ProfileThreePage> {
   @override
   void initState() {
-    getUserPersons();
     super.initState();
   }
 
-  UserPerson person;
+  UserTest person;
 
-  Future<UserPerson> getRemoteInfo() async {
+  Future<UserTest> getRemoteInfo() async {
     var res = await checkConnection();
     var person;
     if (res == true) {
@@ -39,18 +39,9 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
   }
 
   getRestInfo() async {
-    await UserInfoRest().getUserPerson();
-    var res = await UserInfoRest().getUserPerson();
+    await UserInfoRest().getInfo();
+    var res = await UserInfoRest().getInfo();
     return res;
-  }
-
-  void getUserPersons() async {
-    UserPerson person1 = await getRemoteInfo();
-    if (person1 != null) {
-      setState(() {
-        person = person1;
-      });
-    }
   }
 
   @override
@@ -58,7 +49,7 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
             onPressed: () => Navigator.push(
-                context, MaterialPageRoute(builder: (_) => LeaveInboxList())),
+                context, MaterialPageRoute(builder: (_) => HiddenMenuPage())),
             backgroundColor: Colors.redAccent,
             child: Icon(Icons.menu)),
         backgroundColor: Colors.grey.shade300,
@@ -96,7 +87,7 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                                     Row(
                                       children: <Widget>[
                                         Text(
-                                          ' ${person.firstName}',
+                                          '$aToken',
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold,
@@ -106,7 +97,7 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                                           width: 5,
                                         ),
                                         Text(
-                                          '${person.middleName}',
+                                          '$aToken',
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold,
@@ -116,7 +107,7 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                                           width: 5,
                                         ),
                                         Text(
-                                          '${person.lastName}',
+                                          '$aToken',
                                           style: TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold,
@@ -126,8 +117,8 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                                     ),
                                     ListTile(
                                       contentPadding: EdgeInsets.all(0),
-                                      title: Text('${person.position}'),
-                                      subtitle: Text('${person.locale}'),
+                                      title: Text('$aToken'),
+                                      subtitle: Text('$aToken'),
                                     ),
                                   ],
                                 ),
@@ -222,17 +213,17 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                           Divider(),
                           ListTile(
                             title: Text("Дата рождения"),
-                            subtitle: Text('${person.birthDate}'),
+                            subtitle: Text('$aToken'),
                             leading: Icon(Icons.email),
                           ),
                           ListTile(
                             title: Text("ИИН"),
-                            subtitle: Text('${person.timeZone}'),
+                            subtitle: Text('$aToken'),
                             leading: Icon(Icons.phone),
                           ),
                           ListTile(
                             title: Text("Табельный номер"),
-                            subtitle: Text('${person.name}'),
+                            subtitle: Text('$aToken'),
                             leading: Icon(Icons.location_on),
                           ),
                           ListTile(
@@ -242,7 +233,7 @@ class _ProfileThreePageState extends State<ProfileThreePage> {
                           ),
                           ListTile(
                             title: Text('Пол'),
-                            subtitle: Text("${person.sex}"),
+                            subtitle: Text("$aToken"),
                             leading: Icon(Icons.person_outline),
                           ),
                           FlatButton(

@@ -217,7 +217,7 @@ Widget pageView() {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Image.network(
-                "https://icon-library.net/images/energy-icon-png/energy-icon-png-12.jpg",
+                "https://placeholder.com/wp-content/uploads/2018/10/placeholder.com-logo1.png",
                 fit: BoxFit.contain,
                 height: 80,
               ),

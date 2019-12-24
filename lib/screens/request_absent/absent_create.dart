@@ -1,11 +1,14 @@
 import 'dart:math';
 
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
 import 'package:dropdownfield/dropdownfield.dart';
 import 'package:tsadv_app/screens/Admins/adminList.dart';
-import 'package:tsadv_app/screens/request_absent/abresnt_repo_service.dart';
+import 'package:tsadv_app/screens/notifications_route.dart';
+import 'package:tsadv_app/screens/request_absent/absent_repo_service.dart';
 import 'package:tsadv_app/screens/request_absent/req_model.dart';
 
 class CreatePostScreen extends StatefulWidget {
@@ -14,6 +17,74 @@ class CreatePostScreen extends StatefulWidget {
 }
 
 class _CreatePostScreenState extends State<CreatePostScreen> {
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+  var initializationSettingsAndroid;
+  var initializationSettingsIOS;
+  var initializationSettings;
+
+  void _showNotification() async {
+    await _demoNotification();
+  }
+
+  Future<void> _demoNotification() async {
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+        'channel_ID', 'channel name', 'channel description',
+        importance: Importance.Max,
+        priority: Priority.High,
+        ticker: 'test ticker');
+
+    var iOSChannelSpecifics = IOSNotificationDetails();
+    var platformChannelSpecifics = NotificationDetails(
+        androidPlatformChannelSpecifics, iOSChannelSpecifics);
+
+    await flutterLocalNotificationsPlugin.show(
+        0, 'Уведомление', 'Получен новый запрос', platformChannelSpecifics,
+        payload: 'test oayload');
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initializationSettingsAndroid =
+        new AndroidInitializationSettings('app_icon');
+    initializationSettingsIOS = new IOSInitializationSettings(
+        onDidReceiveLocalNotification: onDidReceiveLocalNotification);
+    initializationSettings = new InitializationSettings(
+        initializationSettingsAndroid, initializationSettingsIOS);
+    flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onSelectNotification: onSelectNotification);
+  }
+
+  Future onSelectNotification(String payload) async {
+    if (payload != null) {
+      debugPrint('Notification payload: $payload');
+    }
+    await Navigator.push(context,
+        new MaterialPageRoute(builder: (context) => new SecondRoute()));
+  }
+
+  Future onDidReceiveLocalNotification(
+      int id, String title, String body, String payload) async {
+    await showDialog(
+        context: context,
+        builder: (BuildContext context) => CupertinoAlertDialog(
+              title: Text(title),
+              content: Text(body),
+              actions: <Widget>[
+                CupertinoDialogAction(
+                  isDefaultAction: true,
+                  child: Text('Ok'),
+                  onPressed: () async {
+                    Navigator.of(context, rootNavigator: true).pop();
+                    await Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => SecondRoute()));
+                  },
+                )
+              ],
+            ));
+  }
+
   final format = DateFormat("yyyy-MM-dd");
   DateTime currentDate = DateTime.now();
   String difference = "";
@@ -139,6 +210,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           onPressed: () {
             createReqs();
             Navigator.pop(context);
+            _showNotification();
           },
           backgroundColor: Colors.green,
           child: Icon(Icons.navigate_next)),

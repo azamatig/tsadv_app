@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:tsadv_app/Utilities/variables.dart';
 import 'package:tsadv_app/data/dbHelper.dart';
-import 'package:tsadv_app/models/user_info_model.dart';
+import 'package:tsadv_app/models/test_user_model.dart';
 import 'package:tsadv_app/services/auth.dart';
+import 'package:tsadv_app/utilities/variables.dart';
 
 class UserInfoRest {
   Auth provider;
@@ -12,25 +12,28 @@ class UserInfoRest {
     provider = Auth();
   }
 
-  getUserPerson() async {
+  getInfo() async {
     final client = await provider.client;
     var url = '${restApiUrl}v2/services/tsadv_RcApiService/getUserPerson';
-    var response =
-        await client.get(url, headers: {'Content-Type': 'application/json'});
+    var response = await client.get(url, headers: {
+      'lang': 'ru',
+      'Authorization': 'Bearer $aToken',
+      'Content-Type': 'application/json',
+    });
 
-    var personInt = jsonDecode(response.body);
-    assert(personInt is Map);
-    UserPerson person = UserPerson.fromMap(personInt);
-    // UserPersonDB().insertNewInfo(person);
-    userId = person.id;
-    var res = await TimelyDB().setUserId(person.id);
+    var scores = jsonDecode(response.body);
+    assert(scores is Map);
+    UserTest info = UserTest.fromMap(scores);
+    // UserInfoDB().insertNewInfo(info);
+    userId = info.id;
+    var res = await TimelyDB().setUserId(info.id);
     if (res >= 1) {
-      return person;
+      return info;
     } else {
       var timely = await TimelyDB().getTimely();
-      timely.userId = person.id;
+      timely.userId = info.id;
       TimelyDB().updateClient(timely);
     }
-    return person;
+    return info;
   }
 }

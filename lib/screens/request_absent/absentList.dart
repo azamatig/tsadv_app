@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:tsadv_app/Utilities/Utilities.dart';
+import 'package:tsadv_app/Utilities/utilities.dart';
 import 'package:tsadv_app/data/user_rest.dart';
-import 'package:tsadv_app/models/user_info_model.dart';
+import 'package:tsadv_app/models/test_user_model.dart';
 import 'package:tsadv_app/screens/login_page.dart';
-import 'package:tsadv_app/screens/request_absent/abresnt_repo_service.dart';
+import 'package:tsadv_app/screens/request_absent/absent_repo_service.dart';
 import 'package:tsadv_app/screens/request_absent/req_model.dart';
 import 'package:tsadv_app/screens/userInfo/userDB.dart';
 
@@ -19,7 +19,7 @@ class AbsentCRUD extends StatefulWidget {
 
 class _AbsentCRUDState extends State<AbsentCRUD> {
   final format = DateFormat("yyyy-MM-dd");
-  UserPerson person;
+  UserTest person;
   final _formKey = GlobalKey<FormState>();
   Future<List<Reqs>> future;
   String fromDate;
@@ -37,7 +37,7 @@ class _AbsentCRUDState extends State<AbsentCRUD> {
     future = RepositoryServiceReq.getAllReqs();
   }
 
-  Future<UserPerson> getRemoteInfo() async {
+  Future<UserTest> getRemoteInfo() async {
     var res = await checkConnection();
     var person;
     if (res == true) {
@@ -50,13 +50,13 @@ class _AbsentCRUDState extends State<AbsentCRUD> {
   }
 
   getRestInfo() async {
-    await UserInfoRest().getUserPerson();
-    var res = await UserInfoRest().getUserPerson();
+    await UserInfoRest().getInfo();
+    var res = await UserInfoRest().getInfo();
     return res;
   }
 
   void getUserPersons() async {
-    UserPerson person1 = await getRemoteInfo();
+    UserTest person1 = await getRemoteInfo();
     if (person1 != null) {
       setState(() {
         person = person1;
@@ -71,7 +71,20 @@ class _AbsentCRUDState extends State<AbsentCRUD> {
 
   updateReqs(Reqs reqs) async {
     reqs.name = 'Одобрено';
-    if (reqs.isDeleted == false) {
+    if (reqs.isDeleted == true) {
+      return Navigator.push(
+          context, MaterialPageRoute(builder: (_) => LoginScreen()));
+    } else {
+      await RepositoryServiceReq.updateReqs(reqs);
+      setState(() {
+        future = RepositoryServiceReq.getAllReqs();
+      });
+    }
+  }
+
+  rejectReqs(Reqs reqs) async {
+    reqs.name = 'Отказано';
+    if (reqs.isDeleted == true) {
       return Navigator.push(
           context, MaterialPageRoute(builder: (_) => LoginScreen()));
     } else {
@@ -142,6 +155,15 @@ class _AbsentCRUDState extends State<AbsentCRUD> {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
+                FlatButton(
+                  onPressed: () => rejectReqs(reqs),
+                  child:
+                      Text('Отказано', style: TextStyle(color: Colors.white)),
+                  color: Colors.red,
+                ),
+                SizedBox(
+                  width: 8,
+                ),
                 FlatButton(
                   onPressed: () => updateReqs(reqs),
                   child:

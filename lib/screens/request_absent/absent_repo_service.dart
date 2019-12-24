@@ -16,10 +16,6 @@ class RepositoryServiceReq {
   }
 
   static Future<Reqs> getReqs(int id) async {
-    //final sql = '''SELECT * FROM ${DatabaseCreator.todoTable}
-    //WHERE ${DatabaseCreator.id} = $id''';
-    //final data = await db.rawQuery(sql);
-
     final sql = '''SELECT * FROM ${DBRequest.reqTable}
     WHERE ${DBRequest.id} = ?''';
 
@@ -31,7 +27,6 @@ class RepositoryServiceReq {
   }
 
   static Future<void> addReqs(Reqs reqs) async {
-
     final sql = '''INSERT INTO ${DBRequest.reqTable}
     (
       ${DBRequest.id},
@@ -59,7 +54,6 @@ class RepositoryServiceReq {
   }
 
   static Future<void> deleteReqs(Reqs reqs) async {
-
     final sql = '''UPDATE ${DBRequest.reqTable}
     SET ${DBRequest.isDeleted} = 1
     WHERE ${DBRequest.id} = ?
@@ -68,11 +62,10 @@ class RepositoryServiceReq {
     List<dynamic> params = [reqs.id];
     final result = await db.rawUpdate(sql, params);
 
-    DBRequest.databaseLog('Delete todo', sql, null, result, params);
+    DBRequest.databaseLog('Delete reqs', sql, null, result, params);
   }
 
   static Future<void> updateReqs(Reqs reqs) async {
-
     final sql = '''UPDATE ${DBRequest.reqTable}
     SET ${DBRequest.name} = ?
     WHERE ${DBRequest.id} = ?
@@ -81,7 +74,7 @@ class RepositoryServiceReq {
     List<dynamic> params = [reqs.name, reqs.id];
     final result = await db.rawUpdate(sql, params);
 
-    DBRequest.databaseLog('Update todo', sql, null, result, params);
+    DBRequest.databaseLog('Update reqs', sql, null, result, params);
   }
 
   static Future<int> reqsCount() async {

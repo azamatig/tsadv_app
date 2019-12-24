@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tsadv_app/Utilities/variables.dart';
-import 'package:tsadv_app/models/user_info_model.dart';
-import 'package:tsadv_app/screens/userInfo/UserController.dart';
+import 'package:tsadv_app/models/test_user_model.dart';
+import 'package:tsadv_app/screens/userInfo/userInfoHelper.dart';
 
 Widget getUserInfoWidget() {
   return Padding(
@@ -25,7 +25,7 @@ Widget getUserInfoWidget() {
   );
 }
 
-Widget _buildUserInfo(BuildContext context, UserPerson person) {
+Widget _buildUserInfo(BuildContext context, UserTest person) {
   return Center(
     child: Container(
       width: MediaQuery.of(context).size.width,

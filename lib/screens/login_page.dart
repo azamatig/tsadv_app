@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tsadv_app/Utilities/Utilities.dart';
+import 'package:tsadv_app/Utilities/utilities.dart';
 import 'package:tsadv_app/services/auth.dart';
 import 'package:tsadv_app/Utilities/variables.dart';
 

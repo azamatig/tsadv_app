@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tsadv_app/models/user_info_model.dart';
+import 'package:tsadv_app/models/test_user_model.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  final UserPerson person;
+  final UserTest person;
 
   EditProfileScreen(this.person);
 
@@ -33,12 +33,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     widget.person.firstName = _firstNameController.text;
     widget.person.lastName = _lastNameController.text;
     widget.person.middleName = _middleNameController.text;
-    widget.person.position = _positionController.text;
+    widget.person.id = _positionController.text;
     widget.person.sex = _sexController.text;
-    widget.person.locale = _localeController.text;
-    widget.person.birthDate = _birthDateController.text;
-    widget.person.timeZone = _timeController.text;
-    widget.person.name = _nameController.text;
+    widget.person.nationalIdentifier = _localeController.text;
+    widget.person.entityName = _timeController.text;
+    widget.person.id = _nameController.text;
 
     if (_formKey.currentState.validate() && !_isLoading) {
       _formKey.currentState.save();
@@ -167,7 +166,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Icons.trip_origin,
                           size: 30.0,
                         ),
-                        labelText: '${widget.person.position}',
+                        labelText: '${widget.person.nationalIdentifier}',
                       ),
                       validator: (input) => input.trim().length > 150
                           ? 'Please enter a bio less than 150 characters'
@@ -181,7 +180,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Icons.trip_origin,
                           size: 30.0,
                         ),
-                        labelText: '${widget.person.locale}',
+                        labelText: '${widget.person.nationalIdentifier}',
                       ),
                       validator: (input) => input.trim().length > 150
                           ? 'Please enter a bio less than 150 characters'
@@ -209,7 +208,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Icons.trip_origin,
                           size: 30.0,
                         ),
-                        labelText: '${widget.person.timeZone}',
+                        labelText: '${widget.person.nationalIdentifier}',
                       ),
                       validator: (input) => input.trim().length > 150
                           ? 'Please enter a bio less than 150 characters'
@@ -223,7 +222,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Icons.trip_origin,
                           size: 30.0,
                         ),
-                        labelText: '${widget.person.name}',
+                        labelText: '${widget.person.nationalIdentifier}',
                       ),
                       validator: (input) => input.trim().length > 150
                           ? 'Please enter a bio less than 150 characters'

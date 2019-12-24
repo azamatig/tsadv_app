@@ -19,19 +19,6 @@ String timely = """
   )
   """;
 
-String carOrder = """
-  CREATE TABLE CAR_ORDER (
-    id TEXT PRIMARY KEY, 
-    _entityName TEXT, 
-    REQUESTED_DATE TEXT, 
-    FROM_ADDRESS TEXT, 
-    TO_ADDRESS TEXT, 
-    CREATE_DATE TEXT,
-    status TEXT, 
-    car_order TEXT
-  )
-  """;
-
 String savedAddress = """
   CREATE TABLE SAVED_ADDRESSES (
     id INTEGER PRIMARY KEY,
@@ -46,20 +33,6 @@ String test = """
     id TEXT PRIMARY KEY,
     userId TEXT,
     test TEXT
-  )
-""";
-
-String assignment = """
-  CREATE TABLE ASSIGNMENT (
-    id TEXT PRIMARY KEY,
-    assignment TEXT
-  )
-""";
-
-String antropometry = """
-  CREATE TABLE ANTROPOMETRY (
-    id TEXT PRIMARY KEY,
-    antropometry TEXT
   )
 """;
 
@@ -103,28 +76,12 @@ String requestList = """
   )
 """;
 
-String placement = """
-  CREATE TABLE PLACEMENT (
-    id TEXT PRIMARY KEY,
-    userId TEXT,
-    placement TEXT
-  )
-""";
-
 String news = """
   CREATE TABLE NEWS (
     id TEXT PRIMARY KEY,
     userId TEXT,
     type TEXT,
     news TEXT
-  )
-""";
-
-String ppe = """
-  CREATE TABLE PERONAL_PROTECTION (
-    id TEXT PRIMARY KEY,
-    userId TEXT,
-    protection TEXT
   )
 """;
 

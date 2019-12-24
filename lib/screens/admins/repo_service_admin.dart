@@ -31,7 +31,6 @@ class RepositoryServiceTodo {
   }
 
   static Future<void> addTodo(Todo todo) async {
-
     final sql = '''INSERT INTO ${DatabaseCreator.todoTable}
     (
       ${DatabaseCreator.id},
@@ -53,7 +52,6 @@ class RepositoryServiceTodo {
   }
 
   static Future<void> deleteTodo(Todo todo) async {
-
     final sql = '''UPDATE ${DatabaseCreator.todoTable}
     SET ${DatabaseCreator.isDeleted} = 1
     WHERE ${DatabaseCreator.id} = ?
@@ -66,7 +64,6 @@ class RepositoryServiceTodo {
   }
 
   static Future<void> updateTodo(Todo todo) async {
-
     final sql = '''UPDATE ${DatabaseCreator.todoTable}
     SET ${DatabaseCreator.name} = ? 
     SET ${DatabaseCreator.position} = ?

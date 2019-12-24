@@ -28,10 +28,9 @@ class DBProvider {
       await db.execute(test);
       await db.execute(admins);
       await db.execute(requestList);
-      await db.execute(assignment);
       await db.execute(userInfo);
-      await db.rawInsert(
-          "INSERT INTO USERINFO(id,firstName,lastName,middleName,position,sex,birthDate,locale,timeZone,name) VALUES (1,'Данияр', 'Ускенбаев','Ердаулетович','Сотрудник','Мужcкой','29.02.1988','Алматы, Казахстан','880229300285','3015')");
+      //  await db.rawInsert(
+      //       "INSERT INTO USERINFO(id,firstName,lastName,middleName,position,sex,birthDate,locale,timeZone,name) VALUES (1,'Данияр', 'Ускенбаев','Ердаулетович','Сотрудник','Мужcкой','29.02.1988','Алматы, Казахстан','880229300285','3015')");
       await db.rawInsert(
           "INSERT INTO TIMELY(id,login,password,pin,userId) VALUES (1,'null', 'null','null','null')");
     });
