@@ -14,10 +14,8 @@ class UserInfoRest {
 
   getInfo() async {
     final client = await provider.client;
-    var url = '${restApiUrl}v2/services/tsadv_RcApiService/getUserPerson';
+    var url = '${restApiUrl}v2/services/tsadv_RcApiService/getUserPerson?lang=ru';
     var response = await client.get(url, headers: {
-      'lang': 'ru',
-      'Authorization': 'Bearer $aToken',
       'Content-Type': 'application/json',
     });
 

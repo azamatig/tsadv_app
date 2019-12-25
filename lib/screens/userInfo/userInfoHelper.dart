@@ -19,7 +19,7 @@ Future<UserTest> getRemoteInfo() async {
     person = await getRestInfo();
     if (person != null) return person;
   }
-  person = await UserPersonDB().getUser();
+  person = await UserInfoRest().getInfo();
 
   return person;
 }

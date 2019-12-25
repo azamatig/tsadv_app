@@ -41,9 +41,9 @@ String userInfo = """
     id TEXT PRIMARY KEY,
     login TEXT,
     name TEXT,
-    firstName TEXT DEFAULT '',
-    middleName TEXT DEFAULT '',
-    lastName TEXT DEFAULT '',
+    firstName TEXT,
+    middleName TEXT,
+    lastName TEXT,
     position TEXT,
     email TEXT,
     sex TEXT,
@@ -51,8 +51,7 @@ String userInfo = """
     birthDate TEXT,
     timeZone TEXT,
     language TEXT,
-    _instanceName TEXT,
-    lang TEXT DEFAULT 'ru'
+    _instanceName TEXT
   )
 """;
 
