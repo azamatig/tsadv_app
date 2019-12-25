@@ -32,62 +32,6 @@ Widget getUserInfoWidget() {
   );
 }
 
-Widget _buildUserInfo(BuildContext context, UserTest person) {
-  return Center(
-    child: Container(
-      width: MediaQuery.of(context).size.width,
-      color: hexToColor("#F4F2F0"),
-      child: Row(
-        children: <Widget>[
-          CircleAvatar(
-            minRadius: 40,
-            maxRadius: 41,
-            backgroundColor: Colors.transparent,
-            backgroundImage: NetworkImage(""),
-          ),
-          const SizedBox(width: 10.0),
-          GestureDetector(
-            onTap: () => Navigator.of(context).pushNamed('/profile'),
-            child: FittedBox(
-              fit: BoxFit.contain,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.7,
-                    child: Text(
-                      " ${person.lastName} ${person.firstName} ${person.middleName}",
-                      style: TextStyle(
-                          fontSize: 16.0, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        '${person.birthDate}',
-                        style: TextStyle(fontSize: 15.0, color: Colors.grey),
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.7,
-                        child: Text(
-                          '',
-                          style:
-                              TextStyle(fontSize: 15.0, color: Colors.orange),
-                        ),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
-}
-
 Widget _ProfileScreenMain(BuildContext context, UserTest info) {
   return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -255,29 +199,39 @@ Widget _ProfileScreenMain(BuildContext context, UserTest info) {
                         ),
                         Divider(),
                         ListTile(
+                          title: Text("Имя"),
+                          subtitle: Text('${info.firstName}'),
+                          leading: Icon(Icons.filter_1),
+                        ),
+                        ListTile(
+                          title: Text("Отчество"),
+                          subtitle: Text('${info.middleName}'),
+                          leading: Icon(Icons.filter_2),
+                        ),
+                        ListTile(
+                          title: Text("Фамилия"),
+                          subtitle: Text('${info.lastName}'),
+                          leading: Icon(Icons.filter_3),
+                        ),
+                        ListTile(
                           title: Text("Дата рождения"),
                           subtitle: Text('${info.birthDate}'),
-                          leading: Icon(Icons.email),
+                          leading: Icon(Icons.date_range),
                         ),
                         ListTile(
                           title: Text("ИИН"),
                           subtitle: Text('${info.nationalIdentifier}'),
-                          leading: Icon(Icons.phone),
-                        ),
-                        ListTile(
-                          title: Text("Табельный номер"),
-                          subtitle: Text('//'),
-                          leading: Icon(Icons.location_on),
+                          leading: Icon(Icons.perm_identity),
                         ),
                         ListTile(
                           title: Text('Семейное положение'),
-                          subtitle: Text('****'),
-                          leading: Icon(Icons.person),
+                          subtitle: Text('${info.maritalStatus}'),
+                          leading: Icon(Icons.favorite_border),
                         ),
                         ListTile(
                           title: Text('Пол'),
                           subtitle: Text("${info.sexName}"),
-                          leading: Icon(Icons.person_outline),
+                          leading: Icon(Icons.person_pin),
                         ),
                         FlatButton(
                           onPressed: () => Navigator.push(context,

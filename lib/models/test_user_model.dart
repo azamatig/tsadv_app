@@ -12,6 +12,7 @@ class UserTest {
   String entityName;
   String id;
   String lastName;
+  String maritalStatus;
   List<dynamic> education;
   List<dynamic> attachments;
   String sex;
@@ -19,6 +20,7 @@ class UserTest {
   DateTime birthDate;
   List<dynamic> competences;
   String firstName;
+  String nationalityName;
   String sexName;
   String middleName;
   String nationalIdentifier;
@@ -27,12 +29,14 @@ class UserTest {
   UserTest({
     this.entityName,
     this.id,
+    this.maritalStatus,
     this.lastName,
     this.education,
     this.attachments,
     this.sex,
     this.experience,
     this.birthDate,
+    this.nationalityName,
     this.competences,
     this.firstName,
     this.sexName,
@@ -43,7 +47,9 @@ class UserTest {
 
   factory UserTest.fromMap(Map<String, dynamic> json) => UserTest(
         entityName: json["_entityName"],
+        nationalityName: json["nationalityName"],
         id: json["id"],
+        maritalStatus: json["maritalStatus"],
         lastName: json["lastName"],
         education: List<dynamic>.from(json["education"].map((x) => x)),
         attachments: List<dynamic>.from(json["attachments"].map((x) => x)),
@@ -60,7 +66,9 @@ class UserTest {
 
   Map<String, dynamic> toMap() => {
         "_entityName": entityName,
+        "nationalityName": nationalityName,
         "id": id,
+        "maritalStatus": maritalStatus,
         "lastName": lastName,
         "education": List<dynamic>.from(education.map((x) => x)),
         "attachments": List<dynamic>.from(attachments.map((x) => x)),

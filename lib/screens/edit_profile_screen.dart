@@ -116,7 +116,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Icons.trip_origin,
                           size: 30.0,
                         ),
-                        labelText: '${widget.person.firstName}',
+                        labelText: 'Имя',
                       ),
                     ),
                     TextFormField(
@@ -127,7 +127,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Icons.trip_origin,
                           size: 30.0,
                         ),
-                        labelText: '${widget.person.middleName}',
+                        labelText: 'Отчество',
                       ),
                     ),
                     TextFormField(
@@ -138,7 +138,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Icons.trip_origin,
                           size: 30.0,
                         ),
-                        labelText: '${widget.person.lastName}',
+                        labelText: 'Фамилия',
                       ),
                       validator: (input) => input.trim().length > 150
                           ? 'Please enter a bio less than 150 characters'
@@ -152,7 +152,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Icons.trip_origin,
                           size: 30.0,
                         ),
-                        labelText: '${widget.person.sex}',
+                        labelText: 'Пол',
                       ),
                       validator: (input) => input.trim().length > 150
                           ? 'Please enter a bio less than 150 characters'
@@ -166,7 +166,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Icons.trip_origin,
                           size: 30.0,
                         ),
-                        labelText: '${widget.person.nationalIdentifier}',
+                        labelText: 'ИИН',
                       ),
                       validator: (input) => input.trim().length > 150
                           ? 'Please enter a bio less than 150 characters'
@@ -180,7 +180,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Icons.trip_origin,
                           size: 30.0,
                         ),
-                        labelText: '${widget.person.nationalIdentifier}',
+                        labelText: 'Семейное положение',
                       ),
                       validator: (input) => input.trim().length > 150
                           ? 'Please enter a bio less than 150 characters'
@@ -194,35 +194,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Icons.trip_origin,
                           size: 30.0,
                         ),
-                        labelText: '${widget.person.birthDate}',
-                      ),
-                      validator: (input) => input.trim().length > 150
-                          ? 'Please enter a bio less than 150 characters'
-                          : null,
-                    ),
-                    TextFormField(
-                      controller: _timeController,
-                      style: TextStyle(fontSize: 18.0),
-                      decoration: InputDecoration(
-                        icon: Icon(
-                          Icons.trip_origin,
-                          size: 30.0,
-                        ),
-                        labelText: '${widget.person.nationalIdentifier}',
-                      ),
-                      validator: (input) => input.trim().length > 150
-                          ? 'Please enter a bio less than 150 characters'
-                          : null,
-                    ),
-                    TextFormField(
-                      controller: _nameController,
-                      style: TextStyle(fontSize: 18.0),
-                      decoration: InputDecoration(
-                        icon: Icon(
-                          Icons.trip_origin,
-                          size: 30.0,
-                        ),
-                        labelText: '${widget.person.nationalIdentifier}',
+                        labelText: 'Дата Рождения',
                       ),
                       validator: (input) => input.trim().length > 150
                           ? 'Please enter a bio less than 150 characters'
