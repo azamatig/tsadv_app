@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tsadv_app/data/user_rest.dart';
 import 'package:tsadv_app/models/test_user_model.dart';
 
 class EditProfileScreen extends StatefulWidget {
@@ -17,27 +18,32 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   TextEditingController _middleNameController = TextEditingController();
   TextEditingController _sexController = TextEditingController();
   TextEditingController _birthDateController = TextEditingController();
-  TextEditingController _localeController = TextEditingController();
-  TextEditingController _positionController = TextEditingController();
+  TextEditingController _iinController = TextEditingController();
+  TextEditingController _maritalStatusController = TextEditingController();
   TextEditingController _timeController = TextEditingController();
   TextEditingController _nameController = TextEditingController();
 
   bool _isLoading = false;
+
+  UserTest info;
 
   @override
   void initState() {
     super.initState();
   }
 
+  sendOrder(UserTest info) async {
+    var res = await UserInfoRest().sendNewRequest(info);
+    return res;
+  }
+
   _submit() async {
     widget.info.firstName = _firstNameController.text;
     widget.info.lastName = _lastNameController.text;
     widget.info.middleName = _middleNameController.text;
-    widget.info.id = _positionController.text;
+    widget.info.maritalStatus = _maritalStatusController.text;
     widget.info.sex = _sexController.text;
-    widget.info.nationalIdentifier = _localeController.text;
-    widget.info.entityName = _timeController.text;
-    widget.info.id = _nameController.text;
+    widget.info.nationalIdentifier = _iinController.text;
 
     if (_formKey.currentState.validate() && !_isLoading) {
       _formKey.currentState.save();
@@ -159,7 +165,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           : null,
                     ),
                     TextFormField(
-                      controller: _positionController,
+                      controller: _iinController,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
                         icon: Icon(
@@ -173,7 +179,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           : null,
                     ),
                     TextFormField(
-                      controller: _localeController,
+                      controller: _maritalStatusController,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
                         icon: Icon(
@@ -211,7 +217,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 BorderRadius.all(Radius.circular(50.0))),
                         child: FlatButton(
                           onPressed: () {
-                            _submit(); //fun1
+                            sendOrder(info); //fun1
                             Navigator.pop(context); //fun2
                           },
                           textColor: Colors.white,

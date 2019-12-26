@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tsadv_app/Utilities/variables.dart';
 import 'package:tsadv_app/models/test_user_model.dart';
 import 'package:tsadv_app/screens/menu_UI.dart';
 import 'package:tsadv_app/screens/request_absent/absent_create.dart';
@@ -42,6 +41,7 @@ Widget getUserInfoWidget() {
   );
 }
 
+// ignore: non_constant_identifier_names
 Widget _ProfileScreenMain(BuildContext context, UserTest info) {
   return Scaffold(
       floatingActionButton: FloatingActionButton(
