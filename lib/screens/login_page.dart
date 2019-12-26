@@ -44,7 +44,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Container(
                     height: MediaQuery.of(context).size.height * 0.35,
                     width: MediaQuery.of(context).size.width,
-                    color: Colors.deepPurple[300],
+                    color: Colors.grey[300],
                   ),
                   clipper: RoundedClipper(60),
                 ),
@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Container(
                     height: MediaQuery.of(context).size.height * 0.33,
                     width: MediaQuery.of(context).size.width,
-                    color: Colors.deepPurpleAccent,
+                    color: Colors.grey,
                   ),
                   clipper: RoundedClipper(50),
                 ),
@@ -65,14 +65,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
                               (MediaQuery.of(context).size.height * 0.30) / 2),
-                          color: Colors.deepPurple[300].withOpacity(0.3)),
+                          color: Colors.grey[300].withOpacity(0.3)),
                       child: Center(
                         child: Container(
                           height: 50,
                           width: 50,
                           decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.deepPurpleAccent),
+                              shape: BoxShape.circle, color: Colors.grey),
                         ),
                       ),
                     )),
@@ -85,14 +84,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
                               (MediaQuery.of(context).size.height * 0.36) / 2),
-                          color: Colors.deepPurple[300].withOpacity(0.3)),
+                          color: Colors.grey[300].withOpacity(0.3)),
                       child: Center(
                         child: Container(
                           height: 50,
                           width: 50,
                           decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.deepPurpleAccent),
+                              shape: BoxShape.circle, color: Colors.grey),
                         ),
                       ),
                     )),
@@ -105,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(
                               (MediaQuery.of(context).size.height * 0.15) / 2),
-                          color: Colors.deepPurple[300].withOpacity(0.3)),
+                          color: Colors.grey[300].withOpacity(0.3)),
                     )),
                 Container(
                   margin: EdgeInsets.only(
@@ -115,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     children: <Widget>[
                       Image.network(
-                        "https://seeklogo.net/wp-content/uploads/2015/08/cortana-vector-logo.png",
+                        "https://pngimage.net/wp-content/uploads/2018/06/logo-placeholder-png.png",
                         height: MediaQuery.of(context).size.height * 0.15,
                         width: MediaQuery.of(context).size.height * 0.15,
                         fit: BoxFit.cover,
@@ -204,7 +202,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: Container(
                             height: MediaQuery.of(context).size.height * 0.065,
                             decoration: BoxDecoration(
-                                color: Colors.deepPurpleAccent,
+                                color: Colors.grey,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(25))),
                             child: Center(

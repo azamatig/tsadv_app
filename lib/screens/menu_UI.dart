@@ -14,13 +14,13 @@ class _HiddenMenuPageState extends State<HiddenMenuPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
+      backgroundColor: Colors.grey.shade500,
       body: SafeArea(
         child: Stack(
           fit: StackFit.expand,
           children: <Widget>[
             Container(
-              color: Colors.blueGrey,
+              color: Colors.grey.shade600,
               height: menuHeight,
               child: Column(
                 children: <Widget>[

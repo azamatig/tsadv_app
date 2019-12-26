@@ -17,7 +17,14 @@ Widget getUserInfoWidget() {
         future: getRemoteInfo(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return LinearProgressIndicator();
+            return Center(
+              child: Container(
+                  height: 100,
+                  width: 100,
+                  child: CircularProgressIndicator(
+                    backgroundColor: Colors.white,
+                  )),
+            );
           }
           if (snapshot.connectionState == ConnectionState.done &&
               snapshot.data == null) {
@@ -26,7 +33,10 @@ Widget getUserInfoWidget() {
           if (snapshot.hasData && snapshot.data != null) {
             return _ProfileScreenMain(context, snapshot.data);
           } else {
-            return LinearProgressIndicator();
+            return Center(
+              child: Container(
+                  height: 100, width: 100, child: CircularProgressIndicator()),
+            );
           }
         }),
   );
@@ -37,7 +47,7 @@ Widget _ProfileScreenMain(BuildContext context, UserTest info) {
       floatingActionButton: FloatingActionButton(
           onPressed: () => Navigator.push(
               context, MaterialPageRoute(builder: (_) => HiddenMenuPage())),
-          backgroundColor: Colors.redAccent,
+          backgroundColor: Colors.red.shade300,
           child: Icon(Icons.menu)),
       backgroundColor: Colors.grey.shade300,
       body: SingleChildScrollView(
@@ -47,7 +57,7 @@ Widget _ProfileScreenMain(BuildContext context, UserTest info) {
               height: 350,
               width: double.infinity,
               child: PNetworkImage(
-                'https://i.pinimg.com/originals/8b/c0/5b/8bc05b293a4d30c615be694b3fa87954.jpg',
+                'https://wmdance.com/wp-content/themes/shapely/assets/images/placeholder_wide.jpg',
                 fit: BoxFit.cover,
               ),
             ),
@@ -130,7 +140,7 @@ Widget _ProfileScreenMain(BuildContext context, UserTest info) {
                                             MaterialPageRoute(
                                                 builder: (_) =>
                                                     CreatePostScreen())),
-                                        color: Colors.green,
+                                        color: Colors.deepPurple.shade200,
                                         icon: Icon(Icons.add_circle_outline),
                                       ),
                                       Text("Создать запрос"),
@@ -145,7 +155,7 @@ Widget _ProfileScreenMain(BuildContext context, UserTest info) {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (_) => LeaveList())),
-                                        color: Colors.red,
+                                        color: Colors.pink.shade200,
                                         icon: Icon(Icons.date_range),
                                       ),
                                       Text("Мои запросы"),
@@ -161,7 +171,7 @@ Widget _ProfileScreenMain(BuildContext context, UserTest info) {
                                             MaterialPageRoute(
                                                 builder: (_) =>
                                                     EditProfileScreen(info))),
-                                        color: Colors.blueAccent,
+                                        color: Colors.blue.shade200,
                                         icon: Icon(Icons.edit),
                                       ),
                                       Text("Профиль"),
@@ -180,7 +190,7 @@ Widget _ProfileScreenMain(BuildContext context, UserTest info) {
                             borderRadius: BorderRadius.circular(10.0),
                             image: DecorationImage(
                                 image: NetworkImage(
-                                    'https://i.pinimg.com/originals/8b/c0/5b/8bc05b293a4d30c615be694b3fa87954.jpg'),
+                                    'https://wmdance.com/wp-content/themes/shapely/assets/images/placeholder_wide.jpg'),
                                 fit: BoxFit.cover)),
                         margin: EdgeInsets.only(left: 16.0),
                       ),
@@ -236,7 +246,10 @@ Widget _ProfileScreenMain(BuildContext context, UserTest info) {
                         FlatButton(
                           onPressed: () => Navigator.push(context,
                               MaterialPageRoute(builder: (_) => LoginScreen())),
-                          child: Text('ВЫЙТИ'),
+                          child: Text(
+                            'ВЫЙТИ',
+                            style: TextStyle(color: Colors.red[300]),
+                          ),
                         ),
                       ],
                     ),

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:tsadv_app/models/test_user_model.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  final UserTest person;
+  final UserTest info;
 
-  EditProfileScreen(this.person);
+  EditProfileScreen(this.info);
 
   @override
   _EditProfileScreenState createState() => _EditProfileScreenState();
@@ -30,14 +30,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   _submit() async {
-    widget.person.firstName = _firstNameController.text;
-    widget.person.lastName = _lastNameController.text;
-    widget.person.middleName = _middleNameController.text;
-    widget.person.id = _positionController.text;
-    widget.person.sex = _sexController.text;
-    widget.person.nationalIdentifier = _localeController.text;
-    widget.person.entityName = _timeController.text;
-    widget.person.id = _nameController.text;
+    widget.info.firstName = _firstNameController.text;
+    widget.info.lastName = _lastNameController.text;
+    widget.info.middleName = _middleNameController.text;
+    widget.info.id = _positionController.text;
+    widget.info.sex = _sexController.text;
+    widget.info.nationalIdentifier = _localeController.text;
+    widget.info.entityName = _timeController.text;
+    widget.info.id = _nameController.text;
 
     if (_formKey.currentState.validate() && !_isLoading) {
       _formKey.currentState.save();
@@ -93,21 +93,21 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
-                    CircleAvatar(
-                      radius: 60.0,
-                      backgroundColor: Colors.grey,
-                      backgroundImage: NetworkImage(
-                          'https://c7.hotpng.com/preview/136/22/549/user-profile-computer-icons-girl-customer-avatar.jpg'),
-                    ),
-                    FlatButton(
-                      onPressed: () => Navigator.maybePop(context),
-                      child: Text(
-                        'Изменить фото профиля',
-                        style: TextStyle(
-                            color: Theme.of(context).accentColor,
-                            fontSize: 16.0),
-                      ),
-                    ),
+                    //              CircleAvatar(
+                    //              radius: 60.0,
+                    //            backgroundColor: Colors.grey,
+                    //          backgroundImage: NetworkImage(
+                    //            'https://c7.hotpng.com/preview/136/22/549/user-profile-computer-icons-girl-customer-avatar.jpg'),
+                    //    ),
+                    //   FlatButton(
+                    //     onPressed: () => Navigator.maybePop(context),
+                    //     child: Text(
+                    //       'Изменить фото профиля',
+                    //       style: TextStyle(
+                    //           color: Theme.of(context).accentColor,
+                    //           fontSize: 16.0),
+                    //    ),
+                    //   ),
                     TextFormField(
                       controller: _firstNameController,
                       style: TextStyle(fontSize: 18.0),

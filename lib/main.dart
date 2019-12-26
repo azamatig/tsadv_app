@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
                         ClipPath(
                           clipper: CustomBackClip(),
                           child: Container(
-                            color: Colors.orangeAccent.shade400,
+                            color: Colors.grey.shade400,
                             width: double.infinity,
                             height: double.infinity,
                           ),
