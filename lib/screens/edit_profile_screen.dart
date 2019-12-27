@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tsadv_app/data/user_rest.dart';
 import 'package:tsadv_app/models/test_user_model.dart';
+import 'package:pedantic/pedantic.dart' show unawaited;
+import 'package:tsadv_app/screens/userInfo/userDB.dart';
 
 class EditProfileScreen extends StatefulWidget {
   final UserTest info;
@@ -20,56 +22,22 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   TextEditingController _birthDateController = TextEditingController();
   TextEditingController _iinController = TextEditingController();
   TextEditingController _maritalStatusController = TextEditingController();
-  TextEditingController _timeController = TextEditingController();
-  TextEditingController _nameController = TextEditingController();
-
-  bool _isLoading = false;
-
-  UserTest info;
 
   @override
   void initState() {
     super.initState();
   }
 
-  sendOrder(UserTest info) async {
+  updaterUser(UserTest info) async {
+    info.firstName = _firstNameController.text;
+    info.lastName = _lastNameController.text;
+    info.middleName = _middleNameController.text;
+    info.maritalStatus = _maritalStatusController.text;
+    info.sex = _sexController.text;
+    info.nationalIdentifier = _iinController.text;
     var res = await UserInfoRest().sendNewRequest(info);
     return res;
   }
-
-  _submit() async {
-    widget.info.firstName = _firstNameController.text;
-    widget.info.lastName = _lastNameController.text;
-    widget.info.middleName = _middleNameController.text;
-    widget.info.maritalStatus = _maritalStatusController.text;
-    widget.info.sex = _sexController.text;
-    widget.info.nationalIdentifier = _iinController.text;
-
-    if (_formKey.currentState.validate() && !_isLoading) {
-      _formKey.currentState.save();
-
-      setState(() {
-        _isLoading = true;
-      });
-    }
-  }
-  /* _displayProfileImage() {
-    // No new profile image
-    if (_profileImage == null) {
-      // No existing profile image
-      if (widget.user.profileImageUrl.isEmpty) {
-        // Display placeholder
-        return AssetImage('assets/images/user_placeholder.jpg');
-      } else {
-        // User profile image exists
-        return CachedNetworkImageProvider(widget.user.profileImageUrl);
-      }
-    } else {
-      // New profile image
-      return FileImage(_profileImage);
-    }
-  }
-*/
 
   @override
   Widget build(BuildContext context) {
@@ -87,12 +55,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         onTap: () => FocusScope.of(context).unfocus(),
         child: ListView(
           children: <Widget>[
-            _isLoading
-                ? LinearProgressIndicator(
-                    backgroundColor: Colors.deepPurple[200],
-                    valueColor: AlwaysStoppedAnimation(Colors.blue),
-                  )
-                : SizedBox.shrink(),
             Padding(
               padding: EdgeInsets.all(30.0),
               child: Form(
@@ -217,7 +179,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 BorderRadius.all(Radius.circular(50.0))),
                         child: FlatButton(
                           onPressed: () {
-                            sendOrder(info); //fun1
+                            updaterUser(widget.info); //fun1
                             Navigator.pop(context); //fun2
                           },
                           textColor: Colors.white,

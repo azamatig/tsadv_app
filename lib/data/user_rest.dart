@@ -41,20 +41,18 @@ class UserInfoRest {
     final client = await provider.client;
     var url = '${restApiUrl}v2/services/tsadv_RcApiService/updatePerson';
     var body = """
-        {        
-          "person":{
+        {
+      "person":{
           "firstName": "${info.firstName}",
-            "birthDate": "${info.birthDate}",
-            "middleName": "${info.middleName}",
-            "lastName": "${info.lastName}",
-            "sexName": "${info.sexName}",
-            "nationalIndetifier": "${info.nationalIdentifier}",
-            "maritalStatus":"${info.maritalStatus}",
-            "sex": "7ae580f1-b20b-ca3f-11dc-fcd53e882cdf"
-            }
-        }
+          "lastName": "${info.lastName}",
+          "middleName": "${info.middleName}",
+          "nationalIdentifier": "${info.nationalIdentifier}",
+          "sex": "49eb65bc-e2f1-c78e-3fc1-5ea9e1c66583",
+          "sexName": "${info.sexName}",
+          "birthDate": "${info.birthDate}"
+          }
+    }
         """;
-
     var response = await client
         .post(url, body: body, headers: {'Content-Type': 'application/json'});
     BaseResult result = BaseResult.fromJson(response.body);
