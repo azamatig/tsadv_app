@@ -13,6 +13,7 @@ class UserTest {
   String id;
   String lastName;
   String maritalStatus;
+  String maritalStatusName;
   List<dynamic> education;
   List<dynamic> attachments;
   String sex;
@@ -30,6 +31,7 @@ class UserTest {
     this.entityName,
     this.id,
     this.maritalStatus,
+    this.maritalStatusName,
     this.lastName,
     this.education,
     this.attachments,
@@ -50,6 +52,7 @@ class UserTest {
         nationalityName: json["nationalityName"],
         id: json["id"],
         maritalStatus: json["maritalStatus"],
+        maritalStatusName: json["maritalStatusName"],
         lastName: json["lastName"],
         education: List<dynamic>.from(json["education"].map((x) => x)),
         attachments: List<dynamic>.from(json["attachments"].map((x) => x)),
@@ -69,6 +72,7 @@ class UserTest {
         "nationalityName": nationalityName,
         "id": id,
         "maritalStatus": maritalStatus,
+        "maritalStatusName": maritalStatusName,
         "lastName": lastName,
         "education": List<dynamic>.from(education.map((x) => x)),
         "attachments": List<dynamic>.from(attachments.map((x) => x)),

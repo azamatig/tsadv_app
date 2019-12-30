@@ -47,9 +47,10 @@ class UserInfoRest {
           "lastName": "${info.lastName}",
           "middleName": "${info.middleName}",
           "nationalIdentifier": "${info.nationalIdentifier}",
-          "sex": "49eb65bc-e2f1-c78e-3fc1-5ea9e1c66583",
+          "sex": "${info.sex}",
           "sexName": "${info.sexName}",
-          "birthDate": "${info.birthDate}"
+          "birthDate": "${info.birthDate}",
+          "maritalStatus": "${info.maritalStatus}"
           }
     }
         """;

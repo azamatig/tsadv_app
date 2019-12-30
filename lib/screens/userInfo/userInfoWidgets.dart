@@ -10,34 +10,35 @@ import '../edit_profile_screen.dart';
 import '../login_page.dart';
 
 Widget getUserInfoWidget() {
-  return Padding(
-    padding: const EdgeInsets.all(4.0),
+  return Container(
+    color: Colors.grey[200],
     child: FutureBuilder(
-        future: getRemoteInfo(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: Container(
-                  height: 100,
-                  width: 100,
-                  child: CircularProgressIndicator(
-                    backgroundColor: Colors.white,
-                  )),
-            );
-          }
-          if (snapshot.connectionState == ConnectionState.done &&
-              snapshot.data == null) {
-            return Center(child: Text('errorToAdmin'));
-          }
-          if (snapshot.hasData && snapshot.data != null) {
-            return _ProfileScreenMain(context, snapshot.data);
-          } else {
-            return Center(
-              child: Container(
-                  height: 100, width: 100, child: CircularProgressIndicator()),
-            );
-          }
-        }),
+      future: getRemoteInfo(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Center(
+            child: Container(
+                height: 50,
+                width: 50,
+                child: CircularProgressIndicator(
+                  backgroundColor: Colors.orangeAccent,
+                )),
+          );
+        }
+        if (snapshot.connectionState == ConnectionState.done &&
+            snapshot.data == null) {
+          return Center(child: Text('errorToAdmin'));
+        }
+        if (snapshot.hasData && snapshot.data != null) {
+          return _ProfileScreenMain(context, snapshot.data);
+        } else {
+          return Center(
+            child: Container(
+                height: 100, width: 100, child: CircularProgressIndicator()),
+          );
+        }
+      },
+    ),
   );
 }
 
@@ -188,6 +189,12 @@ Widget _ProfileScreenMain(BuildContext context, UserTest info) {
                         width: 80,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey[500],
+                                blurRadius: 2.0,
+                              )
+                            ],
                             image: DecorationImage(
                                 image: NetworkImage(
                                     'https://wmdance.com/wp-content/themes/shapely/assets/images/placeholder_wide.jpg'),
@@ -235,7 +242,7 @@ Widget _ProfileScreenMain(BuildContext context, UserTest info) {
                         ),
                         ListTile(
                           title: Text('Семейное положение'),
-                          subtitle: Text('${info.maritalStatus}'),
+                          subtitle: Text('${info.maritalStatusName}'),
                           leading: Icon(Icons.favorite_border),
                         ),
                         ListTile(
