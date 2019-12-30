@@ -232,7 +232,7 @@ Widget _ProfileScreenMain(BuildContext context, UserTest info) {
                         ),
                         ListTile(
                           title: Text("Дата рождения"),
-                          subtitle: Text('${info.birthDate}'),
+                          subtitle: Text('${info.birthDate.toString()}'),
                           leading: Icon(Icons.date_range),
                         ),
                         ListTile(

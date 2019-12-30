@@ -31,30 +31,35 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     super.initState();
   }
 
+//Sets gender to male
   setMaleSex() {
     setState(() {
       _sexController = '49eb65bc-e2f1-c78e-3fc1-5ea9e1c66583';
     });
   }
 
+// Sets gender to female
   setFemaleSex() {
     setState(() {
       _sexController = '7ae580f1-b20b-ca3f-11dc-fcd53e882cdf';
     });
   }
 
+// Sets marital status to married
   setMarried() {
     setState(() {
       _maritalStatusController = '296a70b9-ecf9-cfd6-daed-0299f783f047';
     });
   }
 
+  //Sets marital status to Unmarried
   setBachelor() {
     setState(() {
       _maritalStatusController = '9a89faa2-c10c-706f-afc7-6af382f2d634';
     });
   }
 
+  //Updates Users info
   updaterUser(UserTest info) async {
     info.firstName = _firstNameController.text;
     info.lastName = _lastNameController.text;
@@ -108,7 +113,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
                         icon: Icon(
-                          Icons.trip_origin,
+                          Icons.text_fields,
                           size: 30.0,
                         ),
                         labelText: 'Имя',
@@ -125,7 +130,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
                         icon: Icon(
-                          Icons.trip_origin,
+                          Icons.text_fields,
                           size: 30.0,
                         ),
                         labelText: 'Отчество',
@@ -142,7 +147,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
                         icon: Icon(
-                          Icons.trip_origin,
+                          Icons.text_fields,
                           size: 30.0,
                         ),
                         labelText: 'Фамилия',
@@ -162,7 +167,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
                         icon: Icon(
-                          Icons.trip_origin,
+                          Icons.card_membership,
                           size: 30.0,
                         ),
                         labelText: 'ИИН',
@@ -179,7 +184,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
                         icon: Icon(
-                          Icons.trip_origin,
+                          Icons.perm_contact_calendar,
                           size: 30.0,
                         ),
                         labelText: 'Дата Рождения',
