@@ -170,7 +170,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Icons.card_membership,
                           size: 30.0,
                         ),
-                        labelText: 'ИИН',
+                        labelText: 'ИИН(только цифры)',
                       ),
                       validator: (input) {
                         if (input.isEmpty) {
@@ -187,7 +187,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           Icons.perm_contact_calendar,
                           size: 30.0,
                         ),
-                        labelText: 'Дата Рождения',
+                        labelText: 'Дата Рождения (гггг-Мм-Дд)',
                       ),
                       validator: (input) {
                         if (input.isEmpty) {
@@ -347,7 +347,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             if (_formKey.currentState.validate()) {
                               // If the form is valid, display a updatus.
                               updaterUser(widget.info); //fun1
-                              print('Данные изменены');
+                              print('Success');
                             }
                           },
                           textColor: Colors.white,

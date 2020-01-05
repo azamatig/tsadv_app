@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:tsadv_app/models/test_user_model.dart';
 import 'package:tsadv_app/screens/menu_UI.dart';
 import 'package:tsadv_app/screens/request_absent/absent_create.dart';
@@ -8,6 +9,8 @@ import 'package:tsadv_app/utilities/PNetwork.dart';
 
 import '../edit_profile_screen.dart';
 import '../login_page.dart';
+
+final format = DateFormat("yyyy-MM-dd");
 
 Widget getUserInfoWidget() {
   return Container(
@@ -21,7 +24,7 @@ Widget getUserInfoWidget() {
                 height: 50,
                 width: 50,
                 child: CircularProgressIndicator(
-                  backgroundColor: Colors.orangeAccent,
+                  backgroundColor: Colors.white,
                 )),
           );
         }
@@ -236,7 +239,9 @@ Widget _ProfileScreenMain(BuildContext context, UserTest info) {
                           leading: Icon(Icons.date_range),
                         ),
                         ListTile(
-                          title: Text("ИИН"),
+                          title: Text(
+                            "ИИН",
+                          ),
                           subtitle: Text('${info.nationalIdentifier}'),
                           leading: Icon(Icons.perm_identity),
                         ),

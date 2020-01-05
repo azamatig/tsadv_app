@@ -13,6 +13,7 @@ class UserTest {
   String id;
   String lastName;
   String maritalStatus;
+  String photo;
   String maritalStatusName;
   List<dynamic> education;
   List<dynamic> attachments;
@@ -29,6 +30,7 @@ class UserTest {
 
   UserTest({
     this.entityName,
+    this.photo,
     this.id,
     this.maritalStatus,
     this.maritalStatusName,
@@ -49,6 +51,7 @@ class UserTest {
 
   factory UserTest.fromMap(Map<String, dynamic> json) => UserTest(
         entityName: json["_entityName"],
+        photo: json["photo"],
         nationalityName: json["nationalityName"],
         id: json["id"],
         maritalStatus: json["maritalStatus"],
@@ -70,6 +73,7 @@ class UserTest {
   Map<String, dynamic> toMap() => {
         "_entityName": entityName,
         "nationalityName": nationalityName,
+        "photo": photo,
         "id": id,
         "maritalStatus": maritalStatus,
         "maritalStatusName": maritalStatusName,
