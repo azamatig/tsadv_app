@@ -55,10 +55,10 @@ Widget _ProfileScreenMain(BuildContext context, UserTest info) {
         child: Stack(
           children: <Widget>[
             SizedBox(
-              height: 350,
+              height: 355,
               width: double.infinity,
               child: PNetworkImage(
-                'https://wmdance.com/wp-content/themes/shapely/assets/images/placeholder_wide.jpg',
+                'https://cdn.pixabay.com/photo/2018/05/04/03/24/background-3373146_960_720.jpg',
                 fit: BoxFit.cover,
               ),
             ),

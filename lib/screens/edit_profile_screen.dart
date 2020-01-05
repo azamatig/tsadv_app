@@ -24,7 +24,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Color _pickedFemale = Colors.black54;
   Color _pickedMale = Colors.black54;
   Color _pickedMarried = Colors.black54;
-  Color _pickedUmmarried = Colors.black54;
+  Color _pickedUnmarried = Colors.black54;
 
   @override
   void initState() {
@@ -241,16 +241,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               const EdgeInsets.fromLTRB(25.0, 10.0, 0.0, 0.0),
                           child: Container(
                             decoration: BoxDecoration(
-                                color: _pickedUmmarried,
+                                color: _pickedUnmarried,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(50.0))),
                             child: FlatButton(
                               onPressed: () {
                                 setState(() {
-                                  if (_pickedUmmarried == Colors.black54) {
-                                    _pickedUmmarried = Colors.black87;
+                                  if (_pickedUnmarried == Colors.black54) {
+                                    _pickedUnmarried = Colors.black87;
                                   } else {
-                                    _pickedUmmarried = Colors.black54;
+                                    _pickedUnmarried = Colors.black54;
                                   }
                                 });
                                 setBachelor();
@@ -347,6 +347,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             if (_formKey.currentState.validate()) {
                               // If the form is valid, display a updatus.
                               updaterUser(widget.info); //fun1
+                              print('Данные изменены');
                             }
                           },
                           textColor: Colors.white,
