@@ -109,6 +109,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     //    ),
                     //   ),
                     TextFormField(
+                      //      initialValue: '${info.firstName}',
                       controller: _firstNameController,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(

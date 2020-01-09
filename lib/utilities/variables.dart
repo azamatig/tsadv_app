@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 String langValue;
-String restApiUrl = "http://192.168.88.94:8085/tsadv/rest/";
+String restApiUrl = "http://apps.uco.kz:8089/aa/rest/";
 String aToken;
 String userId;
 

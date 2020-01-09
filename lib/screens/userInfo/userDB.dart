@@ -16,25 +16,25 @@ class UserPersonDB {
     return item;
   }
 
-  updateInfo(UserTest person) async {
+  updateInfo(UserTest info) async {
     final db = await provider.database;
-    var res = await db.update("USERINFO", person.toMap(),
-        where: "id = ?", whereArgs: [person.id]);
+    var res = await db.update("USERINFO", info.toMap(),
+        where: "id = ?", whereArgs: [info.id]);
     return res;
   }
 
-  insertNewInfo(UserTest person) async {
+  insertNewInfo(UserTest info) async {
     final db = await provider.database;
     var table;
     await db
-        .query("USERINFO", where: "id = ?", whereArgs: [person.id])
+        .query("USERINFO", where: "id = ?", whereArgs: [info.id])
         .then((val) => {table = val.first ?? null})
         .catchError((_) => table = null);
     if (table != null) {
-      var res = await updateInfo(person);
+      var res = await updateInfo(info);
       return res;
     }
-    var res = await db.insert("USERINFO", person.toMap());
+    var res = await db.insert("USERINFO", info.toMap());
     return res;
   }
 }

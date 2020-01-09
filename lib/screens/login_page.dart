@@ -196,7 +196,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Container(
                       child: GestureDetector(
                           onTap: () {
-                            print("pressed");
+                            print("loging ing");
                             _pressLogin();
                           },
                           child: Container(

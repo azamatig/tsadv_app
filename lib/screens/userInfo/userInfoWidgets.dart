@@ -30,7 +30,7 @@ Widget getUserInfoWidget() {
         }
         if (snapshot.connectionState == ConnectionState.done &&
             snapshot.data == null) {
-          return Center(child: Text('errorToAdmin'));
+          return Center(child: Text('checkConnection'));
         }
         if (snapshot.hasData && snapshot.data != null) {
           return _ProfileScreenMain(context, snapshot.data);
