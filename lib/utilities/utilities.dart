@@ -165,6 +165,23 @@ createCardElement(Widget childWidget,
   );
 }
 
+class CustomBackClip extends CustomClipper<Path> {
+  @override
+  getClip(Size size) {
+    var path = Path();
+
+    path.lineTo(0.0, size.height * 0.6);
+    path.lineTo(size.width, size.height * 0.75);
+    path.lineTo(size.width, 0);
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper oldClipper) {
+    return true;
+  }
+}
 contain(List list, dynamic f) {
   for (dynamic e in list) {
     if (e.id == f.id) {

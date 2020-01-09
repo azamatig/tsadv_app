@@ -26,13 +26,13 @@ class UserInfoRest {
     UserTest info = UserTest.fromMap(scores);
     // UserInfoDB().insertNewInfo(info);
     userId = info.id;
-    var res = await TimelyDB().setUserId(info.id);
+    var res = await FreyaDB().setUserId(info.id);
     if (res >= 1) {
       return info;
     } else {
-      var timely = await TimelyDB().getTimely();
-      timely.userId = info.id;
-      TimelyDB().updateClient(timely);
+      var freya = await FreyaDB().getFreya();
+      freya.userId = info.id;
+      FreyaDB().updateClient(freya);
     }
     return info;
   }

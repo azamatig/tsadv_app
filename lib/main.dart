@@ -6,6 +6,7 @@ import 'package:tsadv_app/screens/login_page.dart';
 import 'package:tsadv_app/screens/profile_screen.dart';
 import 'package:tsadv_app/Utilities/variables.dart';
 import 'package:tsadv_app/screens/request_absent/absentDB.dart';
+import 'package:tsadv_app/utilities/utilities.dart';
 
 void main() async {
   await DatabaseCreator().initDatabase();
@@ -248,22 +249,4 @@ Widget pageView() {
       builder: SwiperPagination.dots,
     ),
   );
-}
-
-class CustomBackClip extends CustomClipper<Path> {
-  @override
-  getClip(Size size) {
-    var path = Path();
-
-    path.lineTo(0.0, size.height * 0.6);
-    path.lineTo(size.width, size.height * 0.75);
-    path.lineTo(size.width, 0);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper oldClipper) {
-    return true;
-  }
 }

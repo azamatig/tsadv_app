@@ -1,16 +1,5 @@
-String admins = """
-  CREATE TABLE TASKS (
-   id TEXT PRIMARY KEY,
-   userId TEXT,
-   firstName TEXT,
-   lastName TEXT,
-   position TEXT,
-   task TEXT
-)
-  """;
-
-String timely = """
-  CREATE TABLE TIMELY (
+String freya = """
+  CREATE TABLE FREYA (
     id INTEGER PRIMARY KEY,
     login TEXT,
     password TEXT,
@@ -18,23 +7,6 @@ String timely = """
     userId TEXT
   )
   """;
-
-String savedAddress = """
-  CREATE TABLE SAVED_ADDRESSES (
-    id INTEGER PRIMARY KEY,
-    address TEXT,
-    type TEXT,
-    personGroupId TEXT
-  )
-  """;
-
-String test = """
-  CREATE TABLE TESTS (
-    id TEXT PRIMARY KEY,
-    userId TEXT,
-    test TEXT
-  )
-""";
 
 String userInfo = """
   CREATE TABLE USERINFO (
@@ -55,14 +27,6 @@ String userInfo = """
   )
 """;
 
-String notification = """
-  CREATE TABLE NOTIFICATION (
-    id TEXT PRIMARY KEY,
-    userId TEXT,
-    notification TEXT
-  )
-""";
-
 String requestList = """
   CREATE TABLE EVENTS (
     id TEXT PRIMARY KEY,
@@ -75,19 +39,4 @@ String requestList = """
   )
 """;
 
-String news = """
-  CREATE TABLE NEWS (
-    id TEXT PRIMARY KEY,
-    userId TEXT,
-    type TEXT,
-    news TEXT
-  )
-""";
 
-String testingGraphic = """
-  CREATE TABLE TESTING_GRAPHIC (
-    id TEXT PRIMARY KEY,
-    userId TEXT,
-    graphic TEXT
-  )
-""";

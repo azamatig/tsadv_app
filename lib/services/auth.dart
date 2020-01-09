@@ -8,7 +8,6 @@ class Auth {
 
   Future<Client> get client async {
     if (_client != null) return _client;
-    // if _client is null we instantiate it
     _client = await getFromSavedPerson();
     return _client;
   }
@@ -19,14 +18,14 @@ class Auth {
       return res;
     }
     _client = res;
-    var timely = Timely.forClient(id: 1, login: login, password: password);
-    TimelyDB().updateClient(timely);
+    var freya = Freya.forClient(id: 1, login: login, password: password);
+    FreyaDB().updateClient(freya);
     return _client;
   }
 
   getFromSavedPerson() async {
-    var timely = await TimelyDB().getTimely();
-    var res = await AccessToken().getAccessToken(timely.login, timely.password);
+    var freya = await FreyaDB().getFreya();
+    var res = await AccessToken().getAccessToken(freya.login, freya.password);
     if (checkIsTokenFalse(res)) {
       return res;
     }

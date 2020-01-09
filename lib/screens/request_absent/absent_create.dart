@@ -27,6 +27,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     await _demoNotification();
   }
 
+  // Local notifications demo
   Future<void> _demoNotification() async {
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
         'channel_ID', 'channel name', 'channel description',
@@ -40,12 +41,13 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
     await flutterLocalNotificationsPlugin.show(
         0, 'Уведомление', 'Получен новый запрос', platformChannelSpecifics,
-        payload: 'test oayload');
+        payload: 'test payload');
   }
 
   @override
   void initState() {
     super.initState();
+    //Init local notifications
     initializationSettingsAndroid =
         new AndroidInitializationSettings('app_icon');
     initializationSettingsIOS = new IOSInitializationSettings(
@@ -87,7 +89,6 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
   final format = DateFormat("yyyy-MM-dd");
   DateTime currentDate = DateTime.now();
-  String difference = "";
   Future<List<Reqs>> future;
   String fromDate;
   String toDate;
@@ -149,6 +150,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     }
   }
 
+  //Made for test reasons, temporarily
   String randomReqs() {
     final randomNumber = Random().nextInt(4);
     String reqs;

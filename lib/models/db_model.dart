@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-class Timely {
-  Timely({
+class Freya {
+  Freya({
     this.id,
     this.login,
     this.password,
@@ -9,15 +9,15 @@ class Timely {
     this.userId,
   });
 
-  Timely.forClient({
+  Freya.forClient({
     this.id,
     this.login,
     this.password,
   });
 
-  factory Timely.fromJson(String str) => Timely.fromMap(json.decode(str));
+  factory Freya.fromJson(String str) => Freya.fromMap(json.decode(str));
 
-  factory Timely.fromMap(Map<String, dynamic> json) => Timely(
+  factory Freya.fromMap(Map<String, dynamic> json) => Freya(
         id: json["id"] == null ? null : json["id"],
         login: json["login"] == null ? null : json["login"],
         password: json["password"] == null ? null : json["password"],

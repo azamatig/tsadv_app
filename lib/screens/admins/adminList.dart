@@ -47,14 +47,6 @@ class _SqfLiteCrudState extends State<SqfLiteCrud> {
     print(todo.name);
   }
 
-  updateTodo(Todo todo) async {
-    todo.name = 'please 🤫';
-    await RepositoryServiceTodo.updateTodo(todo);
-    setState(() {
-      future = RepositoryServiceTodo.getAllTodos();
-    });
-  }
-
   deleteTodo(Todo todo) async {
     await RepositoryServiceTodo.deleteTodo(todo);
     setState(() {
@@ -200,6 +192,7 @@ class _SqfLiteCrudState extends State<SqfLiteCrud> {
     );
   }
 
+  //For test reasons
   String randomTodo() {
     final randomNumber = Random().nextInt(4);
     String todo;
